@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Excess and Shortage — Code 3</title>
+<title>Excess and Shortage — Code 4</title>
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@500;700&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@500;600&display=swap" rel="stylesheet" />
@@ -38,7 +38,6 @@ html, body { margin: 0; padding: 0; background: var(--pasture); color: var(--ink
 .site-header { text-align: center; padding-bottom: 10px; }
 .brand { font-family: var(--font-display); font-weight: 700; font-size: 48px; margin: 0; color: var(--fence-dark); line-height: 1; }
 
-/* Tabs */
 .tabs { display: flex; gap: 8px; justify-content: center; margin-bottom: 15px; }
 .tab-btn { 
     font-family: var(--font-display); font-size: 22px; padding: 8px 24px; 
@@ -47,15 +46,12 @@ html, body { margin: 0; padding: 0; background: var(--pasture); color: var(--ink
 }
 .tab-btn.active { background: var(--paper); color: var(--ink); font-weight: 700; border-color: var(--amber); }
 
-/* Teacher & Reset row */
 .admin-row { display: flex; align-items: center; justify-content: center; gap: 20px; margin-bottom: 15px; }
 
-/* Problem Card */
 .card { background: var(--paper); border: 1px solid var(--line); border-radius: var(--radius); padding: 20px; box-shadow: 0 4px 10px rgba(0,0,0,0.05); margin-bottom: 20px; }
 .problem-card { border-left: 10px solid var(--amber); }
 .problem-text { margin: 0; font-size: 26px; }
 
-/* Demo Toggle */
 .demo-toggle-wrap { 
     display: inline-flex; align-items: center; gap: 10px; background: var(--paper); 
     padding: 8px 16px; border-radius: 12px; border: 2px solid var(--line); 
@@ -63,7 +59,6 @@ html, body { margin: 0; padding: 0; background: var(--pasture); color: var(--ink
 }
 .demo-toggle-wrap input { width: 22px; height: 22px; cursor: pointer; }
 
-/* Controls */
 .controls-row { display: flex; align-items: center; justify-content: center; gap: 15px; margin-bottom: 20px; flex-wrap: wrap; }
 .input-group { display: flex; align-items: center; gap: 10px; }
 .num-input { 
@@ -71,21 +66,17 @@ html, body { margin: 0; padding: 0; background: var(--pasture); color: var(--ink
     border: 2px solid var(--line); border-radius: 8px; padding: 5px;
 }
 
-/* Table */
 .table-scroll { overflow-x: auto; border-radius: var(--radius); border: 2px solid var(--line); margin-bottom: 20px; }
 .esa-table { width: 100%; border-collapse: collapse; background: var(--paper); table-layout: fixed; }
-.esa-table th, .esa-table td { border: 1.5px solid var(--line); padding: 12px 10px; text-align: center; overflow: hidden; vertical-align: middle; }
+.esa-table th, .esa-table td { border: 1.5px solid var(--line); padding: 12px 10px; text-align: center; vertical-align: middle; }
 
-/* Headers: 32px (75% increase) */
 .esa-table th { background: #efe9d8; font-size: 32px; color: var(--ink-soft); font-family: var(--font-display); line-height: 1.2; }
 .esa-table .merged-header { background: var(--amber-locked); color: var(--ink); font-weight: 700; border-bottom: 3px solid var(--amber); }
 
-/* Rate-Specific Header Styles */
 .header-extra { color: var(--tick-green) !important; background: var(--tick-green-soft) !important; }
 .header-short { color: var(--cross-red) !important; background: var(--cross-red-soft) !important; }
 .header-subtext { display: block; font-size: 24px; font-family: var(--font-mono); font-weight: 600; margin-top: 4px; }
 
-/* Table Content: 32px */
 .esa-table td { font-family: var(--font-mono); font-size: 32px; }
 
 .col-noun { width: 220px; }
@@ -94,7 +85,6 @@ html, body { margin: 0; padding: 0; background: var(--pasture); color: var(--ink
 
 .esa-table tr.solved { background: var(--tick-green-soft); outline: 4px solid var(--tick-green); position: relative; z-index: 1; }
 
-/* Equations: 28px (75% increase) */
 .cell-op-wrap { display: flex; align-items: center; justify-content: center; gap: 6px; flex-wrap: wrap; }
 .cell-op { font-size: 28px; color: var(--ink-soft); font-family: var(--font-mono); font-weight: 500; }
 .op-extra { color: var(--tick-green); font-weight: 600; }
@@ -106,7 +96,6 @@ html, body { margin: 0; padding: 0; background: var(--pasture); color: var(--ink
 }
 .cell-input:disabled { background: var(--tick-green-soft); border-color: var(--tick-green); color: var(--ink); opacity: 1; -webkit-text-fill-color: var(--ink); }
 
-/* Buttons */
 .btn { 
     font-family: var(--font-body); font-weight: 700; font-size: 20px; padding: 10px 20px; 
     border-radius: 12px; border: none; cursor: pointer; min-height: 44px; display: inline-flex; align-items: center; justify-content: center;
@@ -118,7 +107,6 @@ html, body { margin: 0; padding: 0; background: var(--pasture); color: var(--ink
 .btn-check { font-size: 16px; margin-left: 5px; padding: 5px 10px; }
 .btn-danger { color: var(--cross-red); border: 2px solid var(--cross-red); background: #fff; }
 
-/* Scaffold Panel */
 .scaffold-panel { 
     background: #fff; border: 4px solid var(--amber); border-radius: var(--radius); 
     padding: 25px; margin-bottom: 20px; animation: fadeIn 0.4s ease;
@@ -136,7 +124,11 @@ html, body { margin: 0; padding: 0; background: var(--pasture); color: var(--ink
 .gap-readout { text-align: center; font-size: 32px; font-weight: 700; margin-bottom: 20px; font-family: var(--font-mono); }
 .scaffold-msg { padding: 15px; border-radius: 8px; background: var(--amber-light); margin-top: 15px; font-weight: 600; text-align: center; }
 
-/* Feedback */
+.final-steps-area { border-top: 10px solid var(--amber); margin-top: 30px; animation: fadeIn 0.5s ease; }
+.final-step-row { margin-bottom: 25px; padding-bottom: 15px; border-bottom: 1.5px dashed var(--line); }
+.final-label { display: block; font-weight: 700; margin-bottom: 10px; font-size: 24px; }
+.final-eq-row { display: flex; align-items: center; gap: 15px; margin-bottom: 10px; font-family: var(--font-mono); font-size: 28px; }
+
 .feedback-panel { margin-top: 10px; padding: 12px; border-radius: 8px; font-size: 18px; font-weight: 600; display: flex; align-items: center; justify-content: space-between; gap: 10px; }
 .feedback-panel.bad { background: var(--cross-red-soft); color: var(--cross-red); }
 .skip-link { font-size: 14px; text-decoration: underline; color: var(--ink-soft); cursor: pointer; opacity: 0.6; margin-left: 10px; font-family: var(--font-body); }
@@ -230,9 +222,39 @@ html, body { margin: 0; padding: 0; background: var(--pasture); color: var(--ink
             <div class="controls-row">
                 <input type="text" id="whyInput" class="num-input" style="width: 300px; text-align: left;">
                 <button class="btn btn-primary" id="whyCheckBtn">Check</button>
-                <span id="whySkip" class="skip-link hidden">Skip</span>
+                <span id="whySkip" class="skip-link hidden" id="whySkipLink">Skip</span>
             </div>
             <div id="whyFeedback" class="feedback-panel hidden"></div>
+        </div>
+    </section>
+
+    <!-- FINAL STEPS SECTION -->
+    <section id="finalStepsArea" class="card final-steps-area hidden">
+        <h3 class="brand" style="font-size:32px; margin-bottom:20px;">Final Answer Steps</h3>
+        
+        <div id="finalGroupsStep" class="final-step-row">
+            <label class="final-label" id="finalGroupsLabel"></label>
+            <div class="controls-row" style="justify-content: flex-start;">
+                <input type="number" id="finalGroupsInput" class="num-input" inputmode="numeric">
+                <button class="btn btn-primary" id="finalGroupsBtn">Check</button>
+                <span class="skip-link hidden" id="finalGroupsSkip">Skip</span>
+            </div>
+        </div>
+
+        <div id="finalTotalsStep" class="final-step-row hidden">
+            <label class="final-label" id="finalTotalsLabel"></label>
+            <div class="final-eq-row">
+                <span id="eq1Label"></span>
+                <input type="number" id="finalTotal1Input" class="num-input" inputmode="numeric">
+                <button class="btn btn-primary btn-check" id="finalTotal1Btn">✓</button>
+                <span class="skip-link hidden" id="finalTotal1Skip">Skip</span>
+            </div>
+            <div class="final-eq-row">
+                <span id="eq2Label"></span>
+                <input type="number" id="finalTotal2Input" class="num-input" inputmode="numeric">
+                <button class="btn btn-primary btn-check" id="finalTotal2Btn">✓</button>
+                <span class="skip-link hidden" id="finalTotal2Skip">Skip</span>
+            </div>
         </div>
 
         <div id="finalCelebrate" class="celebrate hidden"></div>
@@ -243,25 +265,25 @@ html, body { margin: 0; padding: 0; background: var(--pasture); color: var(--ink
 (function() {
     const PROBLEMS = [
         {
-            id: "a1", tabLabel: "A1", storageKey: "esa_a1_v5", personName: "Edric", itemName: "sweets", groupNoun: "friends", groupNounSingular: "Friend",
+            id: "a1", tabLabel: "A1", storageKey: "esa_a1_v6", personName: "Edric", itemName: "sweets", groupNoun: "friends", groupNounSingular: "Friend",
             questionText: "<strong>Edric</strong> has some sweets to give to <strong>his friends</strong>. If he gives each friend <strong>3 sweets</strong>, he has <strong>23 sweets left</strong>. If he gives each friend <strong>7 sweets</strong>, he has <strong>3 sweets left</strong>. How many sweets does Edric have?",
             lowRate: 3, lowLeftover: 23, highRate: 7, highRemainder: 3, highType: "extra",
             answerGroups: 5, answerTotal: 38, bigDifference: 20, smallDifference: 4, whyAnswer: "7-3", slideDirection: "remove", slideSteps: 3
         },
         {
-            id: "a2", tabLabel: "A2", storageKey: "esa_a2_v5", personName: "Celeste", itemName: "marbles", groupNoun: "cousins", groupNounSingular: "Cousin",
+            id: "a2", tabLabel: "A2", storageKey: "esa_a2_v6", personName: "Celeste", itemName: "marbles", groupNoun: "cousins", groupNounSingular: "Cousin",
             questionText: "<strong>Celeste</strong> has some marbles to share among her <strong>cousins</strong>. If she gives each cousin <strong>4 marbles</strong>, she has <strong>29 marbles left</strong>. If she gives each cousin <strong>10 marbles</strong>, she has <strong>5 marbles left</strong>. How many marbles does Celeste have?",
             lowRate: 4, lowLeftover: 29, highRate: 10, highRemainder: 5, highType: "extra",
             answerGroups: 4, answerTotal: 45, bigDifference: 24, smallDifference: 6, whyAnswer: "10-4", slideDirection: "remove", slideSteps: 5
         },
         {
-            id: "b1", tabLabel: "B1", storageKey: "esa_b1_v5", personName: "Edric", itemName: "sweets", groupNoun: "friends", groupNounSingular: "Friend",
+            id: "b1", tabLabel: "B1", storageKey: "esa_b1_v6", personName: "Edric", itemName: "sweets", groupNoun: "friends", groupNounSingular: "Friend",
             questionText: "<strong>Edric</strong> has some sweets to give to <strong>his friends</strong>. If he gives each friend <strong>3 sweets</strong>, he has <strong>23 sweets left</strong>. If he gives each friend <strong>7 sweets</strong>, he is <strong>short of 5 sweets</strong>. How many sweets does Edric have?",
             lowRate: 3, lowLeftover: 23, highRate: 7, highRemainder: 5, highType: "short",
             answerGroups: 7, answerTotal: 44, bigDifference: 28, smallDifference: 4, whyAnswer: "7-3", slideDirection: "add", slideSteps: 5
         },
         {
-            id: "b2", tabLabel: "B2", storageKey: "esa_b2_v5", personName: "Celeste", itemName: "marbles", groupNoun: "cousins", groupNounSingular: "Cousin",
+            id: "b2", tabLabel: "B2", storageKey: "esa_b2_v6", personName: "Celeste", itemName: "marbles", groupNoun: "cousins", groupNounSingular: "Cousin",
             questionText: "<strong>Celeste</strong> has some marbles to share among her <strong>cousins</strong>. If she gives each cousin <strong>4 marbles</strong>, she has <strong>29 marbles left</strong>. If she gives each cousin <strong>10 marbles</strong>, she is <strong>short of 7 marbles</strong>. How many marbles does Celeste have?",
             lowRate: 4, lowLeftover: 29, highRate: 10, highRemainder: 7, highType: "short",
             answerGroups: 6, answerTotal: 53, bigDifference: 36, smallDifference: 6, whyAnswer: "10-4", slideDirection: "add", slideSteps: 7
@@ -274,7 +296,7 @@ html, body { margin: 0; padding: 0; background: var(--pasture); color: var(--ink
     const el = {
         tabs: document.getElementById('tabBar'),
         question: document.getElementById('questionText'),
-        groupNoun: document.getElementById('groupNounLabel'),
+        groupNounLabel: document.getElementById('groupNounLabel'),
         groupInput: document.getElementById('groupCountInput'),
         submitBtn: document.getElementById('submitCountBtn'),
         addBtn: document.getElementById('addOneBtn'),
@@ -297,7 +319,23 @@ html, body { margin: 0; padding: 0; background: var(--pasture); color: var(--ink
         whyCheck: document.getElementById('whyCheckBtn'),
         whyFeedback: document.getElementById('whyFeedback'),
         whyPrompt: document.getElementById('whyPrompt'),
-        whySkip: document.getElementById('whySkip'),
+        whySkip: document.getElementById('whySkipLink'),
+        // Final Steps
+        finalArea: document.getElementById('finalStepsArea'),
+        fGroupsLabel: document.getElementById('finalGroupsLabel'),
+        fGroupsInput: document.getElementById('finalGroupsInput'),
+        fGroupsBtn: document.getElementById('finalGroupsBtn'),
+        fGroupsSkip: document.getElementById('finalGroupsSkip'),
+        fTotalsStep: document.getElementById('finalTotalsStep'),
+        fTotalsLabel: document.getElementById('finalTotalsLabel'),
+        eq1Label: document.getElementById('eq1Label'),
+        fTotal1Input: document.getElementById('finalTotal1Input'),
+        fTotal1Btn: document.getElementById('finalTotal1Btn'),
+        fTotal1Skip: document.getElementById('finalTotal1Skip'),
+        eq2Label: document.getElementById('eq2Label'),
+        fTotal2Input: document.getElementById('finalTotal2Input'),
+        fTotal2Btn: document.getElementById('finalTotal2Btn'),
+        fTotal2Skip: document.getElementById('finalTotal2Skip'),
         finalCelebrate: document.getElementById('finalCelebrate')
     };
 
@@ -316,12 +354,24 @@ html, body { margin: 0; padding: 0; background: var(--pasture); color: var(--ink
         el.undoBar.onclick = undoMove;
         el.whyCheck.onclick = checkWhy;
         el.whySkip.onclick = () => { completeWhy(currentProblem.whyAnswer); };
+
+        // Final Step Events
+        el.fGroupsBtn.onclick = () => checkFinalStep('groups', parseInt(el.fGroupsInput.value), currentProblem.answerGroups);
+        el.fGroupsSkip.onclick = () => checkFinalStep('groups', currentProblem.answerGroups, currentProblem.answerGroups);
+        el.fTotal1Btn.onclick = () => checkFinalStep('total1', parseInt(el.fTotal1Input.value), currentProblem.answerTotal);
+        el.fTotal1Skip.onclick = () => checkFinalStep('total1', currentProblem.answerTotal, currentProblem.answerTotal);
+        el.fTotal2Btn.onclick = () => checkFinalStep('total2', parseInt(el.fTotal2Input.value), currentProblem.answerTotal);
+        el.fTotal2Skip.onclick = () => checkFinalStep('total2', currentProblem.answerTotal, currentProblem.answerTotal);
     }
 
     function loadProblem(p) {
         currentProblem = p;
         const saved = localStorage.getItem(p.storageKey);
-        state = saved ? JSON.parse(saved) : { rows: [], scaffoldActive: false, barOffset: 0, barDone: false, diffInputs: {}, attempts: {}, whyDone: false, demoMode: false };
+        state = saved ? JSON.parse(saved) : { 
+            rows: [], scaffoldActive: false, barOffset: 0, barDone: false, 
+            diffInputs: {}, attempts: {}, whyDone: false, demoMode: false,
+            finalGroupsDone: false, finalTotal1Done: false, finalTotal2Done: false
+        };
         el.demoToggle.checked = state.demoMode;
         renderAll();
     }
@@ -342,12 +392,11 @@ html, body { margin: 0; padding: 0; background: var(--pasture); color: var(--ink
     function renderAll() {
         renderTabs();
         el.question.innerHTML = currentProblem.questionText;
-        el.groupNoun.innerText = `Number of ${currentProblem.groupNoun}`;
+        el.groupNounLabel.innerText = `Number of ${currentProblem.groupNoun}`;
         el.addBtn.innerText = `+ Add +1 ${currentProblem.groupNounSingular}`;
         const max = state.rows.length ? Math.max(...state.rows.map(r => r.n)) : "";
         el.groupInput.value = max;
 
-        // Render Complex Table Header
         const highColorClass = currentProblem.highType === 'extra' ? 'header-extra' : 'header-short';
         el.tableHead.innerHTML = `
             <tr>
@@ -365,6 +414,7 @@ html, body { margin: 0; padding: 0; background: var(--pasture); color: var(--ink
         renderTable();
         updateScaffoldVisibility();
         if (state.scaffoldActive) renderScaffold();
+        renderFinalSteps();
     }
 
     function addRow(n) {
@@ -421,9 +471,7 @@ html, body { margin: 0; padding: 0; background: var(--pasture); color: var(--ink
             wrap.appendChild(display);
         } else {
             const input = document.createElement('input');
-            input.className = "cell-input";
-            input.type = "number"; input.inputmode = "numeric";
-            input.value = currentVal || "";
+            input.className = "cell-input"; input.type = "number"; input.inputmode = "numeric"; input.value = currentVal || "";
             const btn = document.createElement('button');
             btn.className = "btn btn-primary btn-check"; btn.innerText = "Check";
             const skip = document.createElement('span');
@@ -484,7 +532,10 @@ html, body { margin: 0; padding: 0; background: var(--pasture); color: var(--ink
             const t2 = currentProblem.highType === 'extra' ? (r.n * currentProblem.highRate + currentProblem.highRemainder) : (r.n * currentProblem.highRate - currentProblem.highRemainder);
             return (state.demoMode || (r.v1 === t1 && r.v2 === t2)) && (t1 === t2);
         });
-        if (solved) updateScaffoldVisibility();
+        if (solved) {
+            updateScaffoldVisibility();
+            renderFinalSteps();
+        }
     }
 
     function updateScaffoldVisibility() {
@@ -545,7 +596,7 @@ html, body { margin: 0; padding: 0; background: var(--pasture); color: var(--ink
         else {
             state.attempts['why'] = (state.attempts['why'] || 0) + 1;
             if (state.attempts['why'] >= 3) completeWhy(currentProblem.whyAnswer);
-            else showFeedbackWhy("Not quite. Compare the two rates (the numbers given for 'each').");
+            else showFeedbackWhy("Not quite. Compare the two rates.");
         }
     }
 
@@ -554,12 +605,80 @@ html, body { margin: 0; padding: 0; background: var(--pasture); color: var(--ink
     function completeWhy(val) {
         state.whyDone = true; el.whyInput.value = val; el.whyInput.disabled = true; el.whyCheck.classList.add('hidden');
         el.whySkip.classList.add('hidden'); el.whyFeedback.classList.add('hidden'); save();
-        el.finalCelebrate.innerHTML = `
-            <h2 class="brand" style="font-size:40px;">Correct!</h2>
-            <p style="font-size:32px; font-weight:700; font-family:var(--font-mono);">${currentProblem.bigDifference} ÷ ${currentProblem.smallDifference} = ${currentProblem.answerGroups} ${currentProblem.groupNoun}.</p>
-            <p style="font-size:24px;">The answer is <strong>${currentProblem.answerTotal} ${currentProblem.itemName}</strong>.</p>
-        `;
-        el.finalCelebrate.classList.remove('hidden');
+        checkSolved(); // Ensure celebration triggers if table already solved
+    }
+
+    function renderFinalSteps() {
+        const isSolved = state.rows.some(r => {
+            const t1 = r.n * currentProblem.lowRate + currentProblem.lowLeftover;
+            const t2 = currentProblem.highType === 'extra' ? (r.n * currentProblem.highRate + currentProblem.highRemainder) : (r.n * currentProblem.highRate - currentProblem.highRemainder);
+            return (state.demoMode || (r.v1 === t1 && r.v2 === t2)) && (t1 === t2);
+        });
+
+        if (!isSolved) { el.finalArea.classList.add('hidden'); return; }
+        
+        el.finalArea.classList.remove('hidden');
+        el.fGroupsLabel.innerText = `How many ${currentProblem.groupNoun} does ${currentProblem.personName} have?`;
+        el.fTotalsLabel.innerText = `How many ${currentProblem.itemName} does ${currentProblem.personName} have?`;
+        
+        const n = currentProblem.answerGroups;
+        el.eq1Label.innerHTML = `<span class="op-extra">${currentProblem.lowRate} each:</span> ${n} × ${currentProblem.lowRate} + ${currentProblem.lowLeftover} =`;
+        const highOp = currentProblem.highType === 'extra' ? '+' : '-';
+        const highColor = currentProblem.highType === 'extra' ? 'op-extra' : 'op-short';
+        el.eq2Label.innerHTML = `<span class="${highColor}">${currentProblem.highRate} each:</span> ${n} × ${currentProblem.highRate} ${highOp} ${currentProblem.highRemainder} =`;
+
+        // Sync state to inputs
+        el.fGroupsSkip.classList.toggle('hidden', !state.demoMode);
+        el.fTotal1Skip.classList.toggle('hidden', !state.demoMode);
+        el.fTotal2Skip.classList.toggle('hidden', !state.demoMode);
+
+        if (state.finalGroupsDone) {
+            el.fGroupsInput.value = currentProblem.answerGroups;
+            el.fGroupsInput.disabled = true;
+            el.fGroupsBtn.classList.add('hidden');
+            el.fGroupsSkip.classList.add('hidden');
+            el.fTotalsStep.classList.remove('hidden');
+        } else {
+            el.fGroupsInput.disabled = false;
+            el.fGroupsBtn.classList.remove('hidden');
+            el.fTotalsStep.classList.add('hidden');
+        }
+
+        if (state.finalTotal1Done) {
+            el.fTotal1Input.value = currentProblem.answerTotal;
+            el.fTotal1Input.disabled = true;
+            el.fTotal1Btn.classList.add('hidden');
+            el.fTotal1Skip.classList.add('hidden');
+        }
+        if (state.finalTotal2Done) {
+            el.fTotal2Input.value = currentProblem.answerTotal;
+            el.fTotal2Input.disabled = true;
+            el.fTotal2Btn.classList.add('hidden');
+            el.fTotal2Skip.classList.add('hidden');
+        }
+
+        if (state.finalTotal1Done && state.finalTotal2Done) {
+            el.finalCelebrate.innerHTML = `
+                <h2 class="brand" style="font-size:40px;">Correct!</h2>
+                <p style="font-size:32px; font-weight:700; font-family:var(--font-mono);">${currentProblem.personName} has ${currentProblem.answerTotal} ${currentProblem.itemName}.</p>
+                <button class="btn btn-primary" onclick="location.reload()">Start Over</button>
+            `;
+            el.finalCelebrate.classList.remove('hidden');
+        }
+    }
+
+    function checkFinalStep(key, val, target) {
+        const id = `final_${key}`;
+        state.attempts[id] = (state.attempts[id] || 0) + 1;
+        if (val === target) {
+            if (key === 'groups') state.finalGroupsDone = true;
+            if (key === 'total1') state.finalTotal1Done = true;
+            if (key === 'total2') state.finalTotal2Done = true;
+            save(); renderFinalSteps();
+        } else {
+            const msg = state.attempts[id] < 3 ? "Not quite. Look closely at the solved row in the table." : `The answer is ${target}.`;
+            showFeedback(msg, id);
+        }
     }
 
     function checkAllDiffs() {
