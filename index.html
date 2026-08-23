@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Excess and Shortage — Code 2</title>
+<title>Excess and Shortage — Code 3</title>
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@500;700&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@500;600&display=swap" rel="stylesheet" />
@@ -33,43 +33,35 @@
 * { box-sizing: border-box; }
 html, body { margin: 0; padding: 0; background: var(--pasture); color: var(--ink); font-family: var(--font-body); font-size: 24px; line-height: 1.4; }
 
-.page { max-width: 1200px; margin: 0 auto; padding: 10px 14px 60px; }
+.page { max-width: 1250px; margin: 0 auto; padding: 10px 14px 60px; }
 
-.site-header { text-align: center; padding-bottom: 20px; }
-.brand { font-family: var(--font-display); font-weight: 700; font-size: 50px; margin: 0; color: var(--fence-dark); line-height: 1; }
+.site-header { text-align: center; padding-bottom: 10px; }
+.brand { font-family: var(--font-display); font-weight: 700; font-size: 48px; margin: 0; color: var(--fence-dark); line-height: 1; }
 
 /* Tabs */
-.tabs { display: flex; gap: 8px; justify-content: center; margin-bottom: 20px; }
+.tabs { display: flex; gap: 8px; justify-content: center; margin-bottom: 15px; }
 .tab-btn { 
-    font-family: var(--font-display); font-size: 24px; padding: 10px 30px; 
+    font-family: var(--font-display); font-size: 22px; padding: 8px 24px; 
     border-radius: var(--radius) var(--radius) 0 0; border: 2px solid var(--line); 
     border-bottom: none; background: var(--pasture-deep); cursor: pointer; color: var(--ink-soft);
 }
 .tab-btn.active { background: var(--paper); color: var(--ink); font-weight: 700; border-color: var(--amber); }
 
-/* Common UI */
+/* Teacher & Reset row */
+.admin-row { display: flex; align-items: center; justify-content: center; gap: 20px; margin-bottom: 15px; }
+
+/* Problem Card */
 .card { background: var(--paper); border: 1px solid var(--line); border-radius: var(--radius); padding: 20px; box-shadow: 0 4px 10px rgba(0,0,0,0.05); margin-bottom: 20px; }
 .problem-card { border-left: 10px solid var(--amber); }
 .problem-text { margin: 0; font-size: 26px; }
 
 /* Demo Toggle */
 .demo-toggle-wrap { 
-    display: inline-flex; align-items: center; gap: 12px; background: var(--paper); 
+    display: inline-flex; align-items: center; gap: 10px; background: var(--paper); 
     padding: 8px 16px; border-radius: 12px; border: 2px solid var(--line); 
-    font-size: 20px; font-weight: 700; cursor: pointer; margin-bottom: 15px;
+    font-size: 18px; font-weight: 700; cursor: pointer;
 }
-.demo-toggle-wrap input { width: 26px; height: 26px; cursor: pointer; }
-
-/* Rate Cards */
-.rate-container { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-bottom: 25px; }
-.rate-card { 
-    text-align: center; padding: 20px; border-radius: var(--radius); border: 4px solid;
-    display: flex; flex-direction: column; gap: 5px;
-}
-.rate-card.green { border-color: var(--tick-green); color: var(--tick-green); background: var(--tick-green-soft); }
-.rate-card.red { border-color: var(--cross-red); color: var(--cross-red); background: var(--cross-red-soft); }
-.rate-val { font-family: var(--font-display); font-size: 36px; font-weight: 700; }
-.rate-sub { font-family: var(--font-mono); font-size: 28px; font-weight: 600; }
+.demo-toggle-wrap input { width: 22px; height: 22px; cursor: pointer; }
 
 /* Controls */
 .controls-row { display: flex; align-items: center; justify-content: center; gap: 15px; margin-bottom: 20px; flex-wrap: wrap; }
@@ -82,22 +74,31 @@ html, body { margin: 0; padding: 0; background: var(--pasture); color: var(--ink
 /* Table */
 .table-scroll { overflow-x: auto; border-radius: var(--radius); border: 2px solid var(--line); margin-bottom: 20px; }
 .esa-table { width: 100%; border-collapse: collapse; background: var(--paper); table-layout: fixed; }
-.esa-table th, .esa-table td { border: 1.5px solid var(--line); padding: 12px 10px; text-align: center; overflow: hidden; }
+.esa-table th, .esa-table td { border: 1.5px solid var(--line); padding: 12px 10px; text-align: center; overflow: hidden; vertical-align: middle; }
 
-/* 75% increase from 18px -> 32px approx */
-.esa-table th { background: #efe9d8; font-size: 32px; color: var(--ink-soft); font-family: var(--font-display); line-height: 1.1; }
+/* Headers: 32px (75% increase) */
+.esa-table th { background: #efe9d8; font-size: 32px; color: var(--ink-soft); font-family: var(--font-display); line-height: 1.2; }
+.esa-table .merged-header { background: var(--amber-locked); color: var(--ink); font-weight: 700; border-bottom: 3px solid var(--amber); }
+
+/* Rate-Specific Header Styles */
+.header-extra { color: var(--tick-green) !important; background: var(--tick-green-soft) !important; }
+.header-short { color: var(--cross-red) !important; background: var(--cross-red-soft) !important; }
+.header-subtext { display: block; font-size: 24px; font-family: var(--font-mono); font-weight: 600; margin-top: 4px; }
+
+/* Table Content: 32px */
 .esa-table td { font-family: var(--font-mono); font-size: 32px; }
 
-/* Narrow first column to force wrapping */
-.col-noun { width: 180px; }
+.col-noun { width: 220px; }
 .col-calc { width: auto; }
-.col-diff { width: 160px; }
+.col-diff { width: 180px; }
 
 .esa-table tr.solved { background: var(--tick-green-soft); outline: 4px solid var(--tick-green); position: relative; z-index: 1; }
 
-/* 75% increase from 16px -> 28px */
-.cell-op-wrap { display: flex; align-items: center; justify-content: center; gap: 8px; flex-wrap: wrap; }
+/* Equations: 28px (75% increase) */
+.cell-op-wrap { display: flex; align-items: center; justify-content: center; gap: 6px; flex-wrap: wrap; }
 .cell-op { font-size: 28px; color: var(--ink-soft); font-family: var(--font-mono); font-weight: 500; }
+.op-extra { color: var(--tick-green); font-weight: 600; }
+.op-short { color: var(--cross-red); font-weight: 600; }
 
 .cell-input { 
     font-family: var(--font-mono); font-size: 32px; width: 110px; text-align: center; 
@@ -149,9 +150,10 @@ html, body { margin: 0; padding: 0; background: var(--pasture); color: var(--ink
   body { font-size: 18px; }
   .brand { font-size: 36px; }
   .esa-table th { font-size: 20px; }
+  .header-subtext { font-size: 16px; }
   .cell-op { font-size: 18px; }
   .cell-input { width: 80px; font-size: 22px; }
-  .col-noun { width: 120px; }
+  .col-noun { width: 140px; }
 }
 </style>
 </head>
@@ -164,17 +166,16 @@ html, body { margin: 0; padding: 0; background: var(--pasture); color: var(--ink
 
     <div class="tabs" id="tabBar"></div>
 
-    <div style="text-align: center;">
+    <div class="admin-row">
         <label class="demo-toggle-wrap">
-            <input type="checkbox" id="demoToggle"> Demo Mode
+            <input type="checkbox" id="demoToggle"> Teacher Mode
         </label>
+        <button class="btn btn-ghost btn-danger" id="resetBtn">Reset Problem</button>
     </div>
 
     <section class="card problem-card">
         <p class="problem-text" id="questionText"></p>
     </section>
-
-    <div class="rate-container" id="rateCards"></div>
 
     <section class="controls-row">
         <div class="input-group">
@@ -193,9 +194,7 @@ html, body { margin: 0; padding: 0; background: var(--pasture); color: var(--ink
                 <col class="col-calc">
                 <col class="col-diff" id="colDiffStyle">
             </colgroup>
-            <thead>
-                <tr id="tableHead"></tr>
-            </thead>
+            <thead id="tableHead"></thead>
             <tbody id="tableBody"></tbody>
         </table>
     </div>
@@ -238,35 +237,31 @@ html, body { margin: 0; padding: 0; background: var(--pasture); color: var(--ink
 
         <div id="finalCelebrate" class="celebrate hidden"></div>
     </section>
-
-    <div style="text-align: right;">
-        <button class="btn btn-ghost btn-danger" id="resetBtn">Reset Problem</button>
-    </div>
 </div>
 
 <script>
 (function() {
     const PROBLEMS = [
         {
-            id: "a1", tabLabel: "A1", storageKey: "esa_a1_v4", personName: "Edric", itemName: "sweets", groupNoun: "friends", groupNounSingular: "Friend",
+            id: "a1", tabLabel: "A1", storageKey: "esa_a1_v5", personName: "Edric", itemName: "sweets", groupNoun: "friends", groupNounSingular: "Friend",
             questionText: "<strong>Edric</strong> has some sweets to give to <strong>his friends</strong>. If he gives each friend <strong>3 sweets</strong>, he has <strong>23 sweets left</strong>. If he gives each friend <strong>7 sweets</strong>, he has <strong>3 sweets left</strong>. How many sweets does Edric have?",
             lowRate: 3, lowLeftover: 23, highRate: 7, highRemainder: 3, highType: "extra",
             answerGroups: 5, answerTotal: 38, bigDifference: 20, smallDifference: 4, whyAnswer: "7-3", slideDirection: "remove", slideSteps: 3
         },
         {
-            id: "a2", tabLabel: "A2", storageKey: "esa_a2_v4", personName: "Celeste", itemName: "marbles", groupNoun: "cousins", groupNounSingular: "Cousin",
+            id: "a2", tabLabel: "A2", storageKey: "esa_a2_v5", personName: "Celeste", itemName: "marbles", groupNoun: "cousins", groupNounSingular: "Cousin",
             questionText: "<strong>Celeste</strong> has some marbles to share among her <strong>cousins</strong>. If she gives each cousin <strong>4 marbles</strong>, she has <strong>29 marbles left</strong>. If she gives each cousin <strong>10 marbles</strong>, she has <strong>5 marbles left</strong>. How many marbles does Celeste have?",
             lowRate: 4, lowLeftover: 29, highRate: 10, highRemainder: 5, highType: "extra",
             answerGroups: 4, answerTotal: 45, bigDifference: 24, smallDifference: 6, whyAnswer: "10-4", slideDirection: "remove", slideSteps: 5
         },
         {
-            id: "b1", tabLabel: "B1", storageKey: "esa_b1_v4", personName: "Edric", itemName: "sweets", groupNoun: "friends", groupNounSingular: "Friend",
+            id: "b1", tabLabel: "B1", storageKey: "esa_b1_v5", personName: "Edric", itemName: "sweets", groupNoun: "friends", groupNounSingular: "Friend",
             questionText: "<strong>Edric</strong> has some sweets to give to <strong>his friends</strong>. If he gives each friend <strong>3 sweets</strong>, he has <strong>23 sweets left</strong>. If he gives each friend <strong>7 sweets</strong>, he is <strong>short of 5 sweets</strong>. How many sweets does Edric have?",
             lowRate: 3, lowLeftover: 23, highRate: 7, highRemainder: 5, highType: "short",
             answerGroups: 7, answerTotal: 44, bigDifference: 28, smallDifference: 4, whyAnswer: "7-3", slideDirection: "add", slideSteps: 5
         },
         {
-            id: "b2", tabLabel: "B2", storageKey: "esa_b2_v4", personName: "Celeste", itemName: "marbles", groupNoun: "cousins", groupNounSingular: "Cousin",
+            id: "b2", tabLabel: "B2", storageKey: "esa_b2_v5", personName: "Celeste", itemName: "marbles", groupNoun: "cousins", groupNounSingular: "Cousin",
             questionText: "<strong>Celeste</strong> has some marbles to share among her <strong>cousins</strong>. If she gives each cousin <strong>4 marbles</strong>, she has <strong>29 marbles left</strong>. If she gives each cousin <strong>10 marbles</strong>, she is <strong>short of 7 marbles</strong>. How many marbles does Celeste have?",
             lowRate: 4, lowLeftover: 29, highRate: 10, highRemainder: 7, highType: "short",
             answerGroups: 6, answerTotal: 53, bigDifference: 36, smallDifference: 6, whyAnswer: "10-4", slideDirection: "add", slideSteps: 7
@@ -279,7 +274,6 @@ html, body { margin: 0; padding: 0; background: var(--pasture); color: var(--ink
     const el = {
         tabs: document.getElementById('tabBar'),
         question: document.getElementById('questionText'),
-        rateCards: document.getElementById('rateCards'),
         groupNoun: document.getElementById('groupNounLabel'),
         groupInput: document.getElementById('groupCountInput'),
         submitBtn: document.getElementById('submitCountBtn'),
@@ -291,7 +285,6 @@ html, body { margin: 0; padding: 0; background: var(--pasture); color: var(--ink
         demoToggle: document.getElementById('demoToggle'),
         resetBtn: document.getElementById('resetBtn'),
         colDiffStyle: document.getElementById('colDiffStyle'),
-        // Scaffold UI
         gapReadout: document.getElementById('gapReadout'),
         bar1: document.getElementById('bar1'),
         bar2: document.getElementById('bar2'),
@@ -310,19 +303,14 @@ html, body { margin: 0; padding: 0; background: var(--pasture); color: var(--ink
 
     function init() {
         loadProblem(PROBLEMS[0]);
-
         el.submitBtn.onclick = () => addRow(parseInt(el.groupInput.value));
         el.addBtn.onclick = () => {
             const max = state.rows.length ? Math.max(...state.rows.map(r => r.n)) : 0;
             addRow(max + 1);
         };
-        el.demoToggle.onchange = (e) => {
-            state.demoMode = e.target.checked;
-            save(); renderAll();
-        };
+        el.demoToggle.onchange = (e) => { state.demoMode = e.target.checked; save(); renderAll(); };
         el.scaffoldBtn.onclick = toggleScaffold;
         el.resetBtn.onclick = resetProblem;
-        
         el.addBar.onclick = () => moveBars(1);
         el.removeBar.onclick = () => moveBars(-1);
         el.undoBar.onclick = undoMove;
@@ -333,20 +321,7 @@ html, body { margin: 0; padding: 0; background: var(--pasture); color: var(--ink
     function loadProblem(p) {
         currentProblem = p;
         const saved = localStorage.getItem(p.storageKey);
-        if (saved) {
-            state = JSON.parse(saved);
-        } else {
-            state = {
-                rows: [],
-                scaffoldActive: false,
-                barOffset: 0,
-                barDone: false,
-                diffInputs: {},
-                attempts: {},
-                whyDone: false,
-                demoMode: false
-            };
-        }
+        state = saved ? JSON.parse(saved) : { rows: [], scaffoldActive: false, barOffset: 0, barDone: false, diffInputs: {}, attempts: {}, whyDone: false, demoMode: false };
         el.demoToggle.checked = state.demoMode;
         renderAll();
     }
@@ -369,34 +344,24 @@ html, body { margin: 0; padding: 0; background: var(--pasture); color: var(--ink
         el.question.innerHTML = currentProblem.questionText;
         el.groupNoun.innerText = `Number of ${currentProblem.groupNoun}`;
         el.addBtn.innerText = `+ Add +1 ${currentProblem.groupNounSingular}`;
-        
-        // Sync input to highest row
         const max = state.rows.length ? Math.max(...state.rows.map(r => r.n)) : "";
         el.groupInput.value = max;
 
-        // Rate Cards
-        el.rateCards.innerHTML = `
-            <div class="rate-card green">
-                <div class="rate-val">${currentProblem.lowRate} each</div>
-                <div class="rate-sub">+${currentProblem.lowLeftover} extra</div>
-            </div>
-            <div class="rate-card ${currentProblem.highType === 'extra' ? 'green' : 'red'}">
-                <div class="rate-val">${currentProblem.highRate} each</div>
-                <div class="rate-sub">${currentProblem.highType === 'extra' ? '+' : '-'}${currentProblem.highRemainder} ${currentProblem.highType}</div>
-            </div>
-        `;
-
-        // Table Head - Logic for wrapping noun
-        const nounHeader = `Number of ${currentProblem.groupNoun}`;
+        // Render Complex Table Header
+        const highColorClass = currentProblem.highType === 'extra' ? 'header-extra' : 'header-short';
         el.tableHead.innerHTML = `
-            <th class="col-noun">${nounHeader}</th>
-            <th class="col-calc">${currentProblem.lowRate} each</th>
-            <th class="col-calc">${currentProblem.highRate} each</th>
-            ${state.scaffoldActive ? '<th class="col-diff">Difference</th>' : ''}
+            <tr>
+                <th rowspan="2" class="col-noun">Number of<br>${currentProblem.groupNoun}</th>
+                <th colspan="2" class="merged-header">Total Number of ${currentProblem.itemName.charAt(0).toUpperCase() + currentProblem.itemName.slice(1)}</th>
+                ${state.scaffoldActive ? '<th rowspan="2" class="col-diff">Difference</th>' : ''}
+            </tr>
+            <tr>
+                <th class="header-extra">${currentProblem.lowRate} each <span class="header-subtext">+${currentProblem.lowLeftover} extra</span></th>
+                <th class="${highColorClass}">${currentProblem.highRate} each <span class="header-subtext">${currentProblem.highType === 'extra' ? '+' : '-'}${currentProblem.highRemainder} ${currentProblem.highType}</span></th>
+            </tr>
         `;
 
         el.colDiffStyle.classList.toggle('hidden', !state.scaffoldActive);
-
         renderTable();
         updateScaffoldVisibility();
         if (state.scaffoldActive) renderScaffold();
@@ -404,18 +369,15 @@ html, body { margin: 0; padding: 0; background: var(--pasture); color: var(--ink
 
     function addRow(n) {
         if (isNaN(n) || n < 1) return;
-        if (state.rows.some(r => r.n === n)) { alert(`This number of ${currentProblem.groupNoun} is already in the table.`); return; }
+        if (state.rows.some(r => r.n === n)) return;
         state.rows.push({ n, v1: null, v2: null, vDiff: null });
-        el.groupInput.value = n; // Sync counter to latest
+        el.groupInput.value = n;
         save(); renderTable();
     }
 
     function renderTable() {
         el.tableBody.innerHTML = "";
-        const sortedRows = state.scaffoldActive 
-            ? [...state.rows].sort((a,b) => a.n - b.n) 
-            : state.rows;
-
+        const sortedRows = state.scaffoldActive ? [...state.rows].sort((a,b) => a.n - b.n) : state.rows;
         sortedRows.forEach(row => {
             const tr = document.createElement('tr');
             const target1 = row.n * currentProblem.lowRate + currentProblem.lowLeftover;
@@ -428,8 +390,8 @@ html, body { margin: 0; padding: 0; background: var(--pasture); color: var(--ink
             }
 
             tr.innerHTML = `<td style="font-weight:700;">${row.n}</td>`;
-            tr.appendChild(renderCell(row, 1, target1, `${row.n} × ${currentProblem.lowRate} + ${currentProblem.lowLeftover}`));
-            tr.appendChild(renderCell(row, 2, target2, `${row.n} × ${currentProblem.highRate} ${currentProblem.highType === 'extra' ? '+' : '-'} ${currentProblem.highRemainder}`));
+            tr.appendChild(renderCell(row, 1, target1, `${row.n} × ${currentProblem.lowRate}`, `+ ${currentProblem.lowLeftover}`, 'extra'));
+            tr.appendChild(renderCell(row, 2, target2, `${row.n} × ${currentProblem.highRate}`, `${currentProblem.highType === 'extra' ? '+' : '-'} ${currentProblem.highRemainder}`, currentProblem.highType));
             
             if (state.scaffoldActive) {
                 const diffTarget = Math.abs(target1 - target2);
@@ -439,15 +401,16 @@ html, body { margin: 0; padding: 0; background: var(--pasture); color: var(--ink
         });
     }
 
-    function renderCell(row, idx, target, label) {
+    function renderCell(row, idx, target, baseOp, modOp, type) {
         const td = document.createElement('td');
         const key = `r${row.n}_v${idx}`;
         const currentVal = row[`v${idx}`];
         const isDone = state.demoMode || currentVal === target;
+        const modClass = type === 'extra' ? 'op-extra' : 'op-short';
 
         const wrap = document.createElement('div');
         wrap.className = "cell-op-wrap";
-        wrap.innerHTML = `<span class="cell-op">${label} = </span>`;
+        wrap.innerHTML = `<span class="cell-op">${baseOp} <span class="${modClass}">${modOp}</span> = </span>`;
 
         if (isDone) {
             const display = document.createElement('div');
@@ -459,30 +422,15 @@ html, body { margin: 0; padding: 0; background: var(--pasture); color: var(--ink
         } else {
             const input = document.createElement('input');
             input.className = "cell-input";
-            input.type = "number";
-            input.inputmode = "numeric";
+            input.type = "number"; input.inputmode = "numeric";
             input.value = currentVal || "";
-            
             const btn = document.createElement('button');
-            btn.className = "btn btn-primary btn-check";
-            btn.innerText = "Check";
-            
+            btn.className = "btn btn-primary btn-check"; btn.innerText = "Check";
             const skip = document.createElement('span');
-            skip.className = "skip-link" + (state.demoMode ? "" : " hidden");
-            skip.innerText = "Skip";
-
-            btn.onclick = () => {
-                const val = parseInt(input.value);
-                handleInput(key, val, target, () => {
-                    row[`v${idx}`] = target;
-                    save(); renderTable(); checkSolved();
-                }, label);
-            };
+            skip.className = "skip-link" + (state.demoMode ? "" : " hidden"); skip.innerText = "Skip";
+            btn.onclick = () => { handleInput(key, parseInt(input.value), target, () => { row[`v${idx}`] = target; save(); renderTable(); checkSolved(); }, baseOp + modOp); };
             skip.onclick = () => { row[`v${idx}`] = target; save(); renderTable(); checkSolved(); };
-            
-            wrap.appendChild(input);
-            wrap.appendChild(btn);
-            wrap.appendChild(skip);
+            wrap.appendChild(input); wrap.appendChild(btn); wrap.appendChild(skip);
         }
         td.appendChild(wrap);
         return td;
@@ -492,35 +440,18 @@ html, body { margin: 0; padding: 0; background: var(--pasture); color: var(--ink
         const td = document.createElement('td');
         const key = `r${row.n}_diff`;
         const isDone = state.demoMode || state.diffInputs[row.n] === target;
-
         if (!state.barDone) {
             td.innerHTML = `<span style="color:var(--ink-soft); font-style:italic; font-size:24px;">...</span>`;
         } else if (isDone) {
             td.innerHTML = `<div class="cell-input" style="background:var(--amber-light); border-color:var(--amber); width:100%; margin:0 auto;">${target}</div>`;
         } else {
-            const input = document.createElement('input');
-            input.className = "cell-input";
-            input.type = "number"; input.inputmode = "numeric";
-            input.style.width = "90px";
-            
-            const btn = document.createElement('button');
-            btn.className = "btn btn-primary btn-check";
-            btn.innerText = "✓";
-            
-            const skip = document.createElement('span');
-            skip.className = "skip-link" + (state.demoMode ? "" : " hidden");
-            skip.innerText = "Skip";
-
-            btn.onclick = () => {
-                handleInput(key, parseInt(input.value), target, () => {
-                    state.diffInputs[row.n] = target;
-                    save(); renderTable(); checkAllDiffs();
-                }, "Difference");
-            };
+            const wrap = document.createElement('div'); wrap.className = "cell-op-wrap";
+            const input = document.createElement('input'); input.className = "cell-input";
+            input.type = "number"; input.inputmode = "numeric"; input.style.width = "90px";
+            const btn = document.createElement('button'); btn.className = "btn btn-primary btn-check"; btn.innerText = "✓";
+            const skip = document.createElement('span'); skip.className = "skip-link" + (state.demoMode ? "" : " hidden"); skip.innerText = "Skip";
+            btn.onclick = () => { handleInput(key, parseInt(input.value), target, () => { state.diffInputs[row.n] = target; save(); renderTable(); checkAllDiffs(); }, "Difference"); };
             skip.onclick = () => { state.diffInputs[row.n] = target; save(); renderTable(); checkAllDiffs(); };
-            
-            const wrap = document.createElement('div');
-            wrap.className = "cell-op-wrap";
             wrap.appendChild(input); wrap.appendChild(btn); wrap.appendChild(skip);
             td.appendChild(wrap);
         }
@@ -529,40 +460,28 @@ html, body { margin: 0; padding: 0; background: var(--pasture); color: var(--ink
 
     function handleInput(id, val, target, onSuccess, hintLabel) {
         state.attempts[id] = (state.attempts[id] || 0) + 1;
-        if (val === target) {
-            onSuccess();
-        } else {
-            const att = state.attempts[id];
-            let msg = att < 3 ? `Not quite. Check your calculation for "${hintLabel}".` : `The answer is ${target}.`;
+        if (val === target) onSuccess();
+        else {
+            const msg = state.attempts[id] < 3 ? `Check your calculation for "${hintLabel}".` : `The answer is ${target}.`;
             showFeedback(msg, id);
         }
     }
 
     function showFeedback(msg, id) {
-        const existing = document.getElementById('fb_' + id);
-        if (existing) existing.remove();
-        const div = document.createElement('div');
-        div.id = 'fb_' + id;
-        div.className = "feedback-panel bad";
+        const existing = document.getElementById('fb_' + id); if (existing) existing.remove();
+        const div = document.createElement('div'); div.id = 'fb_' + id; div.className = "feedback-panel bad";
         div.innerHTML = `<span>${msg}</span><button class="btn btn-ghost btn-check">Retry</button>`;
         div.querySelector('button').onclick = () => div.remove();
         document.body.appendChild(div);
-        
-        const activeEl = document.activeElement;
-        const rect = activeEl.getBoundingClientRect();
-        div.style.position = 'fixed';
-        div.style.top = (rect.bottom + window.scrollY + 10) + 'px';
-        div.style.left = Math.max(10, rect.left - 50) + 'px';
-        div.style.zIndex = 1000;
-        div.style.boxShadow = "0 10px 25px rgba(0,0,0,0.2)";
+        const activeEl = document.activeElement; const rect = activeEl.getBoundingClientRect();
+        div.style.position = 'fixed'; div.style.top = (rect.bottom + window.scrollY + 10) + 'px';
+        div.style.left = Math.max(10, rect.left - 50) + 'px'; div.style.zIndex = 1000; div.style.boxShadow = "0 10px 25px rgba(0,0,0,0.2)";
     }
 
     function checkSolved() {
         const solved = state.rows.find(r => {
             const t1 = r.n * currentProblem.lowRate + currentProblem.lowLeftover;
-            const t2 = currentProblem.highType === 'extra' 
-                ? (r.n * currentProblem.highRate + currentProblem.highRemainder)
-                : (r.n * currentProblem.highRate - currentProblem.highRemainder);
+            const t2 = currentProblem.highType === 'extra' ? (r.n * currentProblem.highRate + currentProblem.highRemainder) : (r.n * currentProblem.highRate - currentProblem.highRemainder);
             return (state.demoMode || (r.v1 === t1 && r.v2 === t2)) && (t1 === t2);
         });
         if (solved) updateScaffoldVisibility();
@@ -580,105 +499,61 @@ html, body { margin: 0; padding: 0; background: var(--pasture); color: var(--ink
     function toggleScaffold() {
         state.scaffoldActive = !state.scaffoldActive;
         if (state.scaffoldActive) {
-            for (let i = 1; i <= currentProblem.answerGroups; i++) {
-                if (!state.rows.some(r => r.n === i)) addRow(i);
-            }
+            for (let i = 1; i <= currentProblem.answerGroups; i++) if (!state.rows.some(r => r.n === i)) addRow(i);
         }
         save(); renderAll();
     }
 
     function renderScaffold() {
-        el.scaffoldArea.classList.remove('hidden');
-        el.scaffoldBtn.classList.add('active');
-        
-        const b1Base = currentProblem.lowLeftover;
-        const b2Base = currentProblem.highType === 'extra' ? currentProblem.highRemainder : -currentProblem.highRemainder;
-        
-        const cur1 = b1Base + state.barOffset;
-        const cur2 = b2Base + state.barOffset;
-        
-        const scale = 5; 
-        updateBar(el.bar1, cur1, scale, document.getElementById('bar1LabelTop'), document.getElementById('bar1LabelBot'));
-        updateBar(el.bar2, cur2, scale, document.getElementById('bar2LabelTop'), document.getElementById('bar2LabelBot'));
-        
+        el.scaffoldArea.classList.remove('hidden'); el.scaffoldBtn.classList.add('active');
+        const b1Base = currentProblem.lowLeftover, b2Base = currentProblem.highType === 'extra' ? currentProblem.highRemainder : -currentProblem.highRemainder;
+        const cur1 = b1Base + state.barOffset, cur2 = b2Base + state.barOffset;
+        updateBar(el.bar1, cur1, 5, document.getElementById('bar1LabelTop'), document.getElementById('bar1LabelBot'));
+        updateBar(el.bar2, cur2, 5, document.getElementById('bar2LabelTop'), document.getElementById('bar2LabelBot'));
         el.gapReadout.innerText = `Gap: ${Math.abs(cur1 - cur2)}`;
-
         if (cur2 === 0 && !state.barDone) {
-            state.barDone = true;
-            el.barSuccess.innerHTML = `The ${currentProblem.highRate} each bar is now at zero. The other bar shows the Big Difference: ${currentProblem.bigDifference}.`;
-            el.barSuccess.classList.remove('hidden');
-            el.addBar.disabled = el.removeBar.disabled = el.undoBar.disabled = true;
-            setTimeout(() => { renderTable(); showWhyStep(); }, 1000);
-            save();
+            state.barDone = true; el.barSuccess.innerHTML = `The ${currentProblem.highRate} each bar is now at zero. The other bar shows the Big Difference: ${currentProblem.bigDifference}.`;
+            el.barSuccess.classList.remove('hidden'); el.addBar.disabled = el.removeBar.disabled = el.undoBar.disabled = true;
+            setTimeout(() => { renderTable(); showWhyStep(); }, 1000); save();
         } else if (state.barDone) {
-            el.barSuccess.classList.remove('hidden');
-            el.addBar.disabled = el.removeBar.disabled = el.undoBar.disabled = true;
+            el.barSuccess.classList.remove('hidden'); el.addBar.disabled = el.removeBar.disabled = el.undoBar.disabled = true;
             showWhyStep();
         }
     }
 
     function updateBar(barEl, val, scale, labelTop, labelBot) {
-        const h = Math.abs(val) * scale;
-        barEl.style.height = h + 'px';
+        const h = Math.abs(val) * scale; barEl.style.height = h + 'px';
         barEl.className = `bar ${val >= 0 ? 'up green' : 'down red'}`;
         const label = `${Math.abs(val)} ${val >= 0 ? 'extra' : 'short'}`;
-        if (val >= 0) {
-            labelTop.innerText = label; labelBot.innerText = "";
-            barEl.style.bottom = '0';
-        } else {
-            labelBot.innerText = label; labelTop.innerText = "";
-            barEl.style.bottom = -h + 'px';
-        }
+        if (val >= 0) { labelTop.innerText = label; labelBot.innerText = ""; barEl.style.bottom = '0'; }
+        else { labelBot.innerText = label; labelTop.innerText = ""; barEl.style.bottom = -h + 'px'; }
     }
 
-    function moveBars(dir) {
-        state.barOffset += dir;
-        save(); renderScaffold();
-    }
+    function moveBars(dir) { state.barOffset += dir; save(); renderScaffold(); }
     function undoMove() { state.barOffset = 0; save(); renderScaffold(); }
-
     function showWhyStep() {
-        el.whyStep.classList.remove('hidden');
-        el.whyPrompt.innerText = `The gap closes by ${currentProblem.smallDifference} every time we add one more ${currentProblem.groupNounSingular.toLowerCase()}. Why ${currentProblem.smallDifference}?`;
+        el.whyStep.classList.remove('hidden'); el.whyPrompt.innerText = `The gap closes by ${currentProblem.smallDifference} every time we add one more ${currentProblem.groupNounSingular.toLowerCase()}. Why ${currentProblem.smallDifference}?`;
         el.whySkip.classList.toggle('hidden', !state.demoMode);
-        if (state.whyDone) {
-            completeWhy(currentProblem.whyAnswer);
-        }
+        if (state.whyDone) completeWhy(currentProblem.whyAnswer);
     }
 
     function checkWhy() {
         const raw = el.whyInput.value.toLowerCase().replace(/\s+/g, '').replace(/[–—]/g, '-').replace(/÷/g, '/');
         const cleanTarget = currentProblem.whyAnswer.toLowerCase().replace(/\s+/g, '').replace(/[–—]/g, '-');
-        
-        if (raw === cleanTarget || raw.startsWith(cleanTarget + "=")) {
-            completeWhy(el.whyInput.value);
-        } else if (!isNaN(parseInt(raw)) && raw.length < 3) {
-            showFeedbackWhy("Show us how you got it. Which two numbers did you compare?");
-        } else {
+        if (raw === cleanTarget || raw.startsWith(cleanTarget + "=")) completeWhy(el.whyInput.value);
+        else if (!isNaN(parseInt(raw)) && raw.length < 3) showFeedbackWhy("Show us how you got it. Which two numbers did you compare?");
+        else {
             state.attempts['why'] = (state.attempts['why'] || 0) + 1;
-            if (state.attempts['why'] >= 3) {
-                completeWhy(currentProblem.whyAnswer);
-            } else {
-                showFeedbackWhy("Not quite. Compare the two rates (the numbers given for 'each').");
-            }
+            if (state.attempts['why'] >= 3) completeWhy(currentProblem.whyAnswer);
+            else showFeedbackWhy("Not quite. Compare the two rates (the numbers given for 'each').");
         }
     }
 
-    function showFeedbackWhy(msg) {
-        el.whyFeedback.innerText = msg;
-        el.whyFeedback.className = "feedback-panel bad";
-        el.whyFeedback.classList.remove('hidden');
-    }
+    function showFeedbackWhy(msg) { el.whyFeedback.innerText = msg; el.whyFeedback.className = "feedback-panel bad"; el.whyFeedback.classList.remove('hidden'); }
 
     function completeWhy(val) {
-        state.whyDone = true;
-        el.whyInput.value = val;
-        el.whyInput.disabled = true;
-        el.whyCheck.classList.add('hidden');
-        el.whySkip.classList.add('hidden');
-        el.whyFeedback.classList.add('hidden');
-        save();
-        
+        state.whyDone = true; el.whyInput.value = val; el.whyInput.disabled = true; el.whyCheck.classList.add('hidden');
+        el.whySkip.classList.add('hidden'); el.whyFeedback.classList.add('hidden'); save();
         el.finalCelebrate.innerHTML = `
             <h2 class="brand" style="font-size:40px;">Correct!</h2>
             <p style="font-size:32px; font-weight:700; font-family:var(--font-mono);">${currentProblem.bigDifference} ÷ ${currentProblem.smallDifference} = ${currentProblem.answerGroups} ${currentProblem.groupNoun}.</p>
@@ -693,10 +568,7 @@ html, body { margin: 0; padding: 0; background: var(--pasture); color: var(--ink
     }
 
     function resetProblem() {
-        if (confirm("Clear all work for this problem?")) {
-            localStorage.removeItem(currentProblem.storageKey);
-            loadProblem(currentProblem);
-        }
+        if (confirm("Clear all work for this problem?")) { localStorage.removeItem(currentProblem.storageKey); loadProblem(currentProblem); }
     }
 
     init();
