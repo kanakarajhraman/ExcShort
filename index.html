@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Excess and Shortage — Code 7</title>
+<title>Excess and Shortage — Code 8</title>
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@500;700&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@500;600&display=swap" rel="stylesheet" />
@@ -130,7 +130,7 @@ html, body { margin: 0; padding: 0; background: var(--pasture); color: var(--ink
 .final-eq-row { display: flex; align-items: center; gap: 15px; margin-bottom: 10px; font-family: var(--font-mono); font-size: 28px; }
 
 .feedback-panel { margin-top: 10px; padding: 12px; border-radius: 8px; font-size: 18px; font-weight: 600; display: flex; align-items: center; justify-content: space-between; gap: 10px; }
-.feedback-panel.bad { background: var(--cross-red-soft); color: var(--cross-red); }
+.feedback-panel.bad { background: var(--cross-red-soft); color: var(--cross-red); border: 2px solid var(--cross-red); }
 .skip-link { font-size: 14px; text-decoration: underline; color: var(--ink-soft); cursor: pointer; opacity: 0.6; margin-left: 10px; font-family: var(--font-body); }
 
 .celebrate { margin-top: 30px; padding: 30px; text-align: center; border: 5px solid var(--tick-green); background: white; border-radius: var(--radius); }
@@ -262,25 +262,25 @@ html, body { margin: 0; padding: 0; background: var(--pasture); color: var(--ink
 (function() {
     const PROBLEMS = [
         {
-            id: "a1", tabLabel: "A1", storageKey: "esa_a1_v10", personName: "Edric", itemName: "sweets", groupNoun: "friends", groupNounSingular: "Friend",
+            id: "a1", tabLabel: "A1", storageKey: "esa_a1_v11", personName: "Edric", itemName: "sweets", groupNoun: "friends", groupNounSingular: "Friend",
             questionText: "<strong>Edric</strong> has some sweets to give to <strong>his friends</strong>. If he gives each friend <strong>3 sweets</strong>, he has <strong>23 sweets left</strong>. If he gives each friend <strong>7 sweets</strong>, he has <strong>3 sweets left</strong>. How many sweets does Edric have?",
             lowRate: 3, lowLeftover: 23, highRate: 7, highRemainder: 3, highType: "extra",
             answerGroups: 5, answerTotal: 38, bigDifference: 20, smallDifference: 4, whyAnswer: "7-3", slideDirection: "remove", slideSteps: 3
         },
         {
-            id: "a2", tabLabel: "A2", storageKey: "esa_a2_v10", personName: "Celeste", itemName: "marbles", groupNoun: "cousins", groupNounSingular: "Cousin",
+            id: "a2", tabLabel: "A2", storageKey: "esa_a2_v11", personName: "Celeste", itemName: "marbles", groupNoun: "cousins", groupNounSingular: "Cousin",
             questionText: "<strong>Celeste</strong> has some marbles to share among her <strong>cousins</strong>. If she gives each cousin <strong>4 marbles</strong>, she has <strong>29 marbles left</strong>. If she gives each cousin <strong>10 marbles</strong>, she has <strong>5 marbles left</strong>. How many marbles does Celeste have?",
             lowRate: 4, lowLeftover: 29, highRate: 10, highRemainder: 5, highType: "extra",
             answerGroups: 4, answerTotal: 45, bigDifference: 24, smallDifference: 6, whyAnswer: "10-4", slideDirection: "remove", slideSteps: 5
         },
         {
-            id: "b1", tabLabel: "B1", storageKey: "esa_b1_v10", personName: "Edric", itemName: "sweets", groupNoun: "friends", groupNounSingular: "Friend",
+            id: "b1", tabLabel: "B1", storageKey: "esa_b1_v11", personName: "Edric", itemName: "sweets", groupNoun: "friends", groupNounSingular: "Friend",
             questionText: "<strong>Edric</strong> has some sweets to give to <strong>his friends</strong>. If he gives each friend <strong>3 sweets</strong>, he has <strong>23 sweets left</strong>. If he gives each friend <strong>7 sweets</strong>, he is <strong>short of 5 sweets</strong>. How many sweets does Edric have?",
             lowRate: 3, lowLeftover: 23, highRate: 7, highRemainder: 5, highType: "short",
             answerGroups: 7, answerTotal: 44, bigDifference: 28, smallDifference: 4, whyAnswer: "7-3", slideDirection: "add", slideSteps: 5
         },
         {
-            id: "b2", tabLabel: "B2", storageKey: "esa_b2_v10", personName: "Celeste", itemName: "marbles", groupNoun: "cousins", groupNounSingular: "Cousin",
+            id: "b2", tabLabel: "B2", storageKey: "esa_b2_v11", personName: "Celeste", itemName: "marbles", groupNoun: "cousins", groupNounSingular: "Cousin",
             questionText: "<strong>Celeste</strong> has some marbles to share among her <strong>cousins</strong>. If she gives each cousin <strong>4 marbles</strong>, she has <strong>29 marbles left</strong>. If she gives each cousin <strong>10 marbles</strong>, she is <strong>short of 7 marbles</strong>. How many marbles does Celeste have?",
             lowRate: 4, lowLeftover: 29, highRate: 10, highRemainder: 7, highType: "short",
             answerGroups: 6, answerTotal: 53, bigDifference: 36, smallDifference: 6, whyAnswer: "10-4", slideDirection: "add", slideSteps: 7
@@ -352,23 +352,18 @@ html, body { margin: 0; padding: 0; background: var(--pasture); color: var(--ink
         el.whyCheck.onclick = checkWhy;
         el.whySkip.onclick = () => { completeWhy(currentProblem.whyAnswer); };
 
-        el.fGroupsBtn.onclick = () => checkFinalStep('groups', parseInt(el.fGroupsInput.value), currentProblem.answerGroups);
-        el.fGroupsSkip.onclick = () => checkFinalStep('groups', currentProblem.answerGroups, currentProblem.answerGroups);
-        el.fTotal1Btn.onclick = () => checkFinalStep('total1', parseInt(el.fTotal1Input.value), currentProblem.answerTotal);
-        el.fTotal1Skip.onclick = () => checkFinalStep('total1', currentProblem.answerTotal, currentProblem.answerTotal);
-        el.fTotal2Btn.onclick = () => checkFinalStep('total2', parseInt(el.fTotal2Input.value), currentProblem.answerTotal);
-        el.fTotal2Skip.onclick = () => checkFinalStep('total2', currentProblem.answerTotal, currentProblem.answerTotal);
+        el.fGroupsBtn.onclick = () => checkFinalStep('groups', el.fGroupsInput, currentProblem.answerGroups);
+        el.fGroupsSkip.onclick = () => checkFinalStep('groups', el.fGroupsInput, currentProblem.answerGroups, true);
+        el.fTotal1Btn.onclick = () => checkFinalStep('total1', el.fTotal1Input, currentProblem.answerTotal);
+        el.fTotal1Skip.onclick = () => checkFinalStep('total1', el.fTotal1Input, currentProblem.answerTotal, true);
+        el.fTotal2Btn.onclick = () => checkFinalStep('total2', el.fTotal2Input, currentProblem.answerTotal);
+        el.fTotal2Skip.onclick = () => checkFinalStep('total2', el.fTotal2Input, currentProblem.answerTotal, true);
     }
 
     function loadProblem(p) {
         currentProblem = p;
         const saved = localStorage.getItem(p.storageKey);
-        if (saved) {
-            state = JSON.parse(saved);
-        } else {
-            state = getDefaultState();
-        }
-        
+        state = saved ? JSON.parse(saved) : getDefaultState();
         el.demoToggle.checked = state.demoMode;
         renderAll();
     }
@@ -418,6 +413,11 @@ html, body { margin: 0; padding: 0; background: var(--pasture); color: var(--ink
         `;
 
         el.colDiffStyle.classList.toggle('hidden', !state.scaffoldActive);
+        
+        // Ensure Counter Sync
+        const max = state.rows.length ? Math.max(...state.rows.map(r => r.n)) : 1;
+        el.groupInput.value = max;
+
         renderTable();
         updateScaffoldVisibility();
         renderScaffold();
@@ -525,19 +525,12 @@ html, body { margin: 0; padding: 0; background: var(--pasture); color: var(--ink
     function processProgression(row) {
         const t1 = row.n * currentProblem.lowRate + currentProblem.lowLeftover;
         const t2 = currentProblem.highType === 'extra' ? (row.n * currentProblem.highRate + currentProblem.highRemainder) : (row.n * currentProblem.highRate - currentProblem.highRemainder);
-        
         const rowIsComplete = (state.demoMode || (row.v1 === t1 && row.v2 === t2));
-        const solutionFound = (t1 === t2);
-
         if (rowIsComplete) {
-            if (solutionFound) {
-                renderAll(); 
-            } else if (!state.demoMode) {
+            if (t1 === t2) renderAll();
+            else if (!state.demoMode) {
                 const lastRow = state.rows[state.rows.length - 1];
-                if (row.n === lastRow.n) {
-                    addRow(row.n + 1);
-                    renderAll();
-                }
+                if (row.n === lastRow.n) { addRow(row.n + 1); renderAll(); }
             }
         }
     }
@@ -567,13 +560,11 @@ html, body { margin: 0; padding: 0; background: var(--pasture); color: var(--ink
     function renderScaffold() {
         el.scaffoldArea.classList.toggle('hidden', !state.scaffoldActive);
         if (!state.scaffoldActive) return;
-
         const b1Base = currentProblem.lowLeftover, b2Base = currentProblem.highType === 'extra' ? currentProblem.highRemainder : -currentProblem.highRemainder;
         const cur1 = b1Base + state.barOffset, cur2 = b2Base + state.barOffset;
         updateBar(el.bar1, cur1, 5, document.getElementById('bar1LabelTop'), document.getElementById('bar1LabelBot'));
         updateBar(el.bar2, cur2, 5, document.getElementById('bar2LabelTop'), document.getElementById('bar2LabelBot'));
         el.gapReadout.innerText = `Gap: ${Math.abs(cur1 - cur2)}`;
-        
         if (cur2 === 0 && !state.barDone) {
             state.barDone = true; el.barSuccess.innerHTML = `The ${currentProblem.highRate} each bar is now at zero. The other bar shows the Big Difference: ${currentProblem.bigDifference}.`;
             el.barSuccess.classList.remove('hidden'); el.addBar.disabled = el.removeBar.disabled = el.undoBar.disabled = true;
@@ -586,7 +577,8 @@ html, body { margin: 0; padding: 0; background: var(--pasture); color: var(--ink
 
     function renderFinalSteps() {
         const isSolved = checkSolvedLogic();
-        if (!isSolved) { el.finalArea.classList.add('hidden'); return; }
+        // Modification: Hide Final Questions if Big & Small Difference is active
+        if (!isSolved || state.scaffoldActive) { el.finalArea.classList.add('hidden'); return; }
         
         el.finalArea.classList.remove('hidden');
         el.fGroupsLabel.innerText = `How many ${currentProblem.groupNoun} does ${currentProblem.personName} have?`;
@@ -607,15 +599,15 @@ html, body { margin: 0; padding: 0; background: var(--pasture); color: var(--ink
             el.fGroupsBtn.classList.add('hidden'); el.fGroupsSkip.classList.add('hidden');
             el.fTotalsStep.classList.remove('hidden');
         } else {
-            el.fGroupsInput.value = ""; el.fGroupsInput.disabled = false; el.fGroupsBtn.classList.remove('hidden');
+            el.fGroupsInput.disabled = false; el.fGroupsBtn.classList.remove('hidden');
             el.fTotalsStep.classList.add('hidden');
         }
 
         if (state.finalTotal1Done) { el.fTotal1Input.value = currentProblem.answerTotal; el.fTotal1Input.disabled = true; el.fTotal1Btn.classList.add('hidden'); el.fTotal1Skip.classList.add('hidden'); }
-        else { el.fTotal1Input.value = ""; el.fTotal1Input.disabled = false; el.fTotal1Btn.classList.remove('hidden'); }
+        else { el.fTotal1Input.disabled = false; el.fTotal1Btn.classList.remove('hidden'); }
         
         if (state.finalTotal2Done) { el.fTotal2Input.value = currentProblem.answerTotal; el.fTotal2Input.disabled = true; el.fTotal2Btn.classList.add('hidden'); el.fTotal2Skip.classList.add('hidden'); }
-        else { el.fTotal2Input.value = ""; el.fTotal2Input.disabled = false; el.fTotal2Btn.classList.remove('hidden'); }
+        else { el.fTotal2Input.disabled = false; el.fTotal2Btn.classList.remove('hidden'); }
 
         if (state.finalTotal1Done && state.finalTotal2Done) {
             el.finalCelebrate.innerHTML = `
@@ -624,32 +616,35 @@ html, body { margin: 0; padding: 0; background: var(--pasture); color: var(--ink
                 <p style="font-size:20px; color:var(--ink-soft);">You've found the final answer! Press 'Reset Problem' if you want to try again.</p>
             `;
             el.finalCelebrate.classList.remove('hidden');
-        } else {
-            el.finalCelebrate.classList.add('hidden');
-        }
+        } else { el.finalCelebrate.classList.add('hidden'); }
     }
 
-    function checkFinalStep(key, val, target) {
+    function checkFinalStep(key, inputEl, target, isSkip = false) {
         const id = `final_${key}`;
-        state.attempts[id] = (state.attempts[id] || 0) + 1;
-        if (val === target) {
+        const val = parseInt(inputEl.value);
+        if (isSkip || val === target) {
             if (key === 'groups') state.finalGroupsDone = true;
             if (key === 'total1') state.finalTotal1Done = true;
             if (key === 'total2') state.finalTotal2Done = true;
             save(); renderFinalSteps();
         } else {
+            state.attempts[id] = (state.attempts[id] || 0) + 1;
             const msg = state.attempts[id] < 3 ? "Not quite. Look closely at the solved row in the table." : `The answer is ${target}.`;
-            showFeedback(msg, id);
+            showFeedback(msg, id, inputEl);
         }
     }
 
-    function showFeedback(msg, id) {
+    function showFeedback(msg, id, targetInput = null) {
         const existing = document.getElementById('fb_' + id); if (existing) existing.remove();
         const div = document.createElement('div'); div.id = 'fb_' + id; div.className = "feedback-panel bad";
         div.innerHTML = `<span>${msg}</span><button class="btn btn-ghost btn-check">Retry</button>`;
-        div.querySelector('button').onclick = () => div.remove();
+        div.querySelector('button').onclick = () => {
+            div.remove();
+            if (targetInput) { targetInput.value = ""; targetInput.focus(); }
+        };
         document.body.appendChild(div);
-        const activeEl = document.activeElement; const rect = activeEl.getBoundingClientRect();
+        const refEl = targetInput || document.activeElement;
+        const rect = refEl.getBoundingClientRect();
         div.style.position = 'fixed'; div.style.top = (rect.bottom + window.scrollY + 10) + 'px';
         div.style.left = Math.max(10, rect.left - 50) + 'px'; div.style.zIndex = 1000; div.style.boxShadow = "0 10px 25px rgba(0,0,0,0.2)";
     }
@@ -688,20 +683,13 @@ html, body { margin: 0; padding: 0; background: var(--pasture); color: var(--ink
 
     function resetProblem() {
         if (confirm("Reset everything for this problem? This will also return to Student Mode.")) { 
-            // 1. Wipe specific storage
             localStorage.removeItem(currentProblem.storageKey); 
-            
-            // 2. Reset state to absolute default
             state = getDefaultState();
-            
-            // 3. Force checkbox UI
             el.demoToggle.checked = false;
-            
-            // 4. Save and full refresh UI
+            // Clear all final inputs manually
+            el.fGroupsInput.value = ""; el.fTotal1Input.value = ""; el.fTotal2Input.value = "";
             save();
             renderAll();
-            
-            // 5. Cleanup leftover overlays
             document.querySelectorAll('.feedback-panel').forEach(p => p.remove());
         }
     }
