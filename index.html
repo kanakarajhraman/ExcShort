@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Excess and Shortage — Code 14</title>
+<title>Excess and Shortage — Code 15</title>
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@500;700&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@500;600&display=swap" rel="stylesheet" />
@@ -151,7 +151,6 @@ html, body { margin: 0; padding: 0; background: var(--pasture); color: var(--ink
 .eq-select { height: 44px; font-size: 24px; border: 2px solid var(--line); border-radius: 8px; background: #fff; cursor: pointer; padding: 0 5px; font-family: var(--font-mono); }
 .eq-input:disabled, .eq-select:disabled { background: var(--tick-green-soft); border-color: var(--tick-green); color: var(--ink); opacity: 1; }
 
-.or-divider { text-align: center; font-family: var(--font-display); font-weight: 700; font-size: 32px; color: var(--amber); margin: 30px 0; border-top: 2px solid var(--line); padding-top: 20px; }
 .final-eq-row { display: flex; align-items: center; gap: 15px; margin-bottom: 12px; font-family: var(--font-mono); font-size: 20px; flex-wrap: wrap; }
 
 .feedback-panel { 
@@ -244,25 +243,25 @@ html, body { margin: 0; padding: 0; background: var(--pasture); color: var(--ink
 (function() {
     const PROBLEMS = [
         {
-            id: "a1", tabLabel: "A1", storageKey: "esa_a1_v18", personName: "Edric", itemName: "sweets", itemNameSingular: "sweet", groupNoun: "friends", groupNounSingular: "Friend",
+            id: "a1", tabLabel: "A1", storageKey: "esa_a1_v19", personName: "Edric", itemName: "sweets", itemNameSingular: "sweet", groupNoun: "friends", groupNounSingular: "Friend",
             questionText: "<strong>Edric</strong> has some sweets to give to <strong>his friends</strong>. If he gives each friend <strong>3 sweets</strong>, he has <strong>23 sweets left</strong>. If he gives each friend <strong>7 sweets</strong>, he has <strong>3 sweets left</strong>. How many sweets does Edric have?",
             lowRate: 3, lowLeftover: 23, highRate: 7, highRemainder: 3, highType: "extra",
             answerGroups: 5, answerTotal: 38, bigDifference: 20, smallDifference: 4
         },
         {
-            id: "a2", tabLabel: "A2", storageKey: "esa_a2_v18", personName: "Celeste", itemName: "marbles", itemNameSingular: "marble", groupNoun: "cousins", groupNounSingular: "Cousin",
+            id: "a2", tabLabel: "A2", storageKey: "esa_a2_v19", personName: "Celeste", itemName: "marbles", itemNameSingular: "marble", groupNoun: "cousins", groupNounSingular: "Cousin",
             questionText: "<strong>Celeste</strong> has some marbles to share among her <strong>cousins</strong>. If she gives each cousin <strong>4 marbles</strong>, she has <strong>29 marbles left</strong>. If she gives each cousin <strong>10 marbles</strong>, she has <strong>5 marbles left</strong>. How many marbles does Celeste have?",
             lowRate: 4, lowLeftover: 29, highRate: 10, highRemainder: 5, highType: "extra",
             answerGroups: 4, answerTotal: 45, bigDifference: 24, smallDifference: 6
         },
         {
-            id: "b1", tabLabel: "B1", storageKey: "esa_b1_v18", personName: "Edric", itemName: "sweets", itemNameSingular: "sweet", groupNoun: "friends", groupNounSingular: "Friend",
+            id: "b1", tabLabel: "B1", storageKey: "esa_b1_v19", personName: "Edric", itemName: "sweets", itemNameSingular: "sweet", groupNoun: "friends", groupNounSingular: "Friend",
             questionText: "<strong>Edric</strong> has some sweets to give to <strong>his friends</strong>. If he gives each friend <strong>3 sweets</strong>, he has <strong>23 sweets left</strong>. If he gives each friend <strong>7 sweets</strong>, he is <strong>short of 5 sweets</strong>. How many sweets does Edric have?",
             lowRate: 3, lowLeftover: 23, highRate: 7, highRemainder: 5, highType: "short",
             answerGroups: 7, answerTotal: 44, bigDifference: 28, smallDifference: 4
         },
         {
-            id: "b2", tabLabel: "B2", storageKey: "esa_b2_v18", personName: "Celeste", itemName: "marbles", itemNameSingular: "marble", groupNoun: "cousins", groupNounSingular: "Cousin",
+            id: "b2", tabLabel: "B2", storageKey: "esa_b2_v19", personName: "Celeste", itemName: "marbles", itemNameSingular: "marble", groupNoun: "cousins", groupNounSingular: "Cousin",
             questionText: "<strong>Celeste</strong> has some marbles to share among her <strong>cousins</strong>. If she gives each cousin <strong>4 marbles</strong>, she has <strong>29 marbles left</strong>. If she gives each cousin <strong>10 marbles</strong>, she is <strong>short of 7 marbles</strong>. How many marbles does Celeste have?",
             lowRate: 4, lowLeftover: 29, highRate: 10, highRemainder: 7, highType: "short",
             answerGroups: 6, answerTotal: 53, bigDifference: 36, smallDifference: 6
@@ -328,7 +327,8 @@ html, body { margin: 0; padding: 0; background: var(--pasture); color: var(--ink
         return { 
             rows: [{ n: 1, v1: null, v2: null }], 
             scaffoldActive: false, scaffoldStep: 0, barOffset: 0, barDone: false,
-            attempts: {}, demoMode: false, stepsDone: {}, finalAnswersDone: {}
+            attempts: {}, demoMode: false, stepsDone: {}, finalAnswersDone: {},
+            activeScenario: null // stores 'low' or 'high' once row 4.1 is done
         };
     }
 
@@ -350,8 +350,6 @@ html, body { margin: 0; padding: 0; background: var(--pasture); color: var(--ink
         el.question.innerHTML = currentProblem.questionText;
         el.groupNounLabel.innerText = `Number of ${currentProblem.groupNoun}`;
         el.addBtn.innerText = `+ Add +1 ${currentProblem.groupNounSingular}`;
-        el.addBar.innerText = `Add +1 ${currentProblem.itemNameSingular}`;
-        el.removeBar.innerText = `Remove -1 ${currentProblem.itemNameSingular}`;
         
         const solved = checkSolvedLogic();
         el.tableControls.classList.toggle('hidden', solved && !state.demoMode);
@@ -505,7 +503,7 @@ html, body { margin: 0; padding: 0; background: var(--pasture); color: var(--ink
         if (state.scaffoldStep >= 1) renderBigDiffStep();
         if (state.scaffoldStep >= 2) renderSmallDiffStep();
         if (state.scaffoldStep >= 3) renderDivisionStep();
-        if (state.scaffoldStep >= 4) renderFinalTotalAlternative();
+        if (state.scaffoldStep >= 4) renderFinalCalculation();
     }
 
     function renderBigDiffStep() {
@@ -521,24 +519,31 @@ html, body { margin: 0; padding: 0; background: var(--pasture); color: var(--ink
         el.scaffoldSteps.appendChild(createEqRow("step3", `How many ${currentProblem.groupNoun} are there?`, [currentProblem.bigDifference, '÷', currentProblem.smallDifference, currentProblem.answerGroups], 3));
     }
 
-    function renderFinalTotalAlternative() {
+    function renderFinalCalculation() {
         const div = document.createElement('div'); div.className = "scaffold-step-row"; div.style.flexDirection = "column"; div.style.alignItems = "flex-start";
         div.innerHTML = `<label class="scaffold-label-inline" style="margin-bottom:20px;">Final calculation for Total ${currentProblem.itemName}:</label>`;
         
-        // Option 1 Path
-        const path1Finished = state.stepsDone['step4a2'];
-        div.appendChild(createEqRow("step4a1", `Scenario 1: Given to ${currentProblem.groupNoun} :`, [currentProblem.answerGroups, '×', currentProblem.lowRate, currentProblem.answerGroups * currentProblem.lowRate], 4, true, path1Finished));
-        div.appendChild(createEqRow("step4a2", `Total ${currentProblem.itemName} (+ Extra) :`, [currentProblem.answerGroups * currentProblem.lowRate, '+', currentProblem.lowLeftover, currentProblem.answerTotal], 4, true));
+        // Dynamic targets based on Low or High scenario
+        const targets = {
+            low: {
+                step4_1: [currentProblem.answerGroups, '×', currentProblem.lowRate, currentProblem.answerGroups * currentProblem.lowRate],
+                step4_2: [currentProblem.answerGroups * currentProblem.lowRate, '+', currentProblem.lowLeftover, currentProblem.answerTotal]
+            },
+            high: {
+                step4_1: [currentProblem.answerGroups, '×', currentProblem.highRate, currentProblem.answerGroups * currentProblem.highRate],
+                step4_2: [currentProblem.answerGroups * currentProblem.highRate, currentProblem.highType === 'extra' ? '+' : '-', currentProblem.highRemainder, currentProblem.answerTotal]
+            }
+        };
 
-        div.innerHTML += `<div class="or-divider">OR</div>`;
+        // Render Step 4.1 (detect scenario)
+        div.appendChild(createMultiScenarioRow("step4_1", `Given to ${currentProblem.groupNoun} :`, targets, 4, true));
 
-        // Option 2 Path
-        const path2Finished = state.stepsDone['step4b2'];
-        const hOp = currentProblem.highType === 'extra' ? '+' : '-';
-        div.appendChild(createEqRow("step4b1", `Scenario 2: Given to ${currentProblem.groupNoun} :`, [currentProblem.answerGroups, '×', currentProblem.highRate, currentProblem.answerGroups * currentProblem.highRate], 4, true, path2Finished));
-        div.appendChild(createEqRow("step4b2", `Total ${currentProblem.itemName} (${currentProblem.highType === 'extra' ? '+' : '-'} ${currentProblem.highType.charAt(0).toUpperCase() + currentProblem.highType.slice(1)}) :`, [currentProblem.answerGroups * currentProblem.highRate, hOp, currentProblem.highRemainder, currentProblem.answerTotal], 4, true));
+        // Render Step 4.2 (requires consistency)
+        if (state.stepsDone['step4_1']) {
+            div.appendChild(createMultiScenarioRow("step4_2", `Total ${currentProblem.itemName} :`, targets, 4, true));
+        }
 
-        if (state.stepsDone['step4a2'] || state.stepsDone['step4b2']) {
+        if (state.stepsDone['step4_2']) {
              const cel = document.createElement('div'); cel.className = "celebrate";
              cel.innerHTML = `<h2>Correct!</h2><p>${currentProblem.personName} has ${currentProblem.answerTotal} ${currentProblem.itemName}.</p>`;
              div.appendChild(cel);
@@ -546,11 +551,11 @@ html, body { margin: 0; padding: 0; background: var(--pasture); color: var(--ink
         el.scaffoldSteps.appendChild(div);
     }
 
-    function createEqRow(id, label, expected, stepIdx, subRow = false, forceDisabled = false) {
+    function createMultiScenarioRow(id, label, targets, stepIdx, subRow) {
         const container = document.createElement('div'); container.className = subRow ? "final-eq-row" : "scaffold-step-row";
         container.innerHTML = `<span class="scaffold-label-inline">${label}</span>`;
         const group = document.createElement('div'); group.className = "eq-group";
-        const isDone = state.stepsDone[id] || forceDisabled;
+        const isDone = state.stepsDone[id];
 
         const v1 = createEqInput(isDone); const op = createEqSelect(isDone); const v2 = createEqInput(isDone); const res = createEqInput(isDone);
         group.appendChild(v1); group.appendChild(op); group.appendChild(v2); group.appendChild(document.createTextNode(" = ")); group.appendChild(res);
@@ -558,12 +563,66 @@ html, body { margin: 0; padding: 0; background: var(--pasture); color: var(--ink
         if (!isDone) {
             const btn = document.createElement('button'); btn.className = "btn btn-primary btn-check"; btn.innerText = "Check";
             btn.onclick = () => {
-                const u1 = parseInt(v1.value), u2 = parseInt(v2.value), uRes = parseInt(res.value);
-                const isOpMatch = op.value === expected[1];
-                const isResMatch = uRes === expected[3];
+                const u1 = parseInt(v1.value), u2 = parseInt(v2.value), uRes = parseInt(res.value), uOp = op.value;
                 
+                // If it's Step 4.1, try both scenarios. If it's Step 4.2, use the scenario saved in state.
+                let scenariosToTest = ['low', 'high'];
+                if (id === 'step4_2' && state.activeScenario) scenariosToTest = [state.activeScenario];
+
+                let matchFound = false;
+                for (let s of scenariosToTest) {
+                    const exp = targets[s][id];
+                    const isOpMatch = uOp === exp[1];
+                    const isResMatch = uRes === exp[3];
+                    let isInputsMatch = false;
+
+                    if (exp[1] === '+' || exp[1] === '×') {
+                        isInputsMatch = (u1 === exp[0] && u2 === exp[2]) || (u1 === exp[2] && u2 === exp[0]);
+                    } else {
+                        isInputsMatch = (u1 === exp[0] && u2 === exp[2]);
+                    }
+
+                    if (isOpMatch && isResMatch && isInputsMatch) {
+                        matchFound = true;
+                        if (id === 'step4_1') state.activeScenario = s; // Lock scenario for the next row
+                        break;
+                    }
+                }
+
+                if (matchFound) {
+                    state.stepsDone[id] = true; save(); renderAll();
+                } else {
+                    showFeedback("Incorrect values.", id);
+                }
+            };
+            group.appendChild(btn);
+        } else {
+            // Figure out which values to show based on what was actually solved
+            const s = state.activeScenario || 'low';
+            const exp = targets[s][id];
+            v1.value = exp[0]; op.value = exp[1]; v2.value = exp[2]; res.value = exp[3];
+            v1.disabled = op.disabled = v2.disabled = res.disabled = true; group.appendChild(document.createTextNode(" ✓"));
+        }
+        container.appendChild(group); return container;
+    }
+
+    function createEqRow(id, label, expected, stepIdx, subRow = false) {
+        const container = document.createElement('div'); container.className = subRow ? "final-eq-row" : "scaffold-step-row";
+        container.innerHTML = `<span class="scaffold-label-inline">${label}</span>`;
+        const group = document.createElement('div'); group.className = "eq-group";
+        const isDone = state.stepsDone[id];
+
+        const v1 = createEqInput(isDone); const op = createEqSelect(isDone); const v2 = createEqInput(isDone); const res = createEqInput(isDone);
+        group.appendChild(v1); group.appendChild(op); group.appendChild(v2); group.appendChild(document.createTextNode(" = ")); group.appendChild(res);
+
+        if (!isDone) {
+            const btn = document.createElement('button'); btn.className = "btn btn-primary btn-check"; btn.innerText = "Check";
+            btn.onclick = () => {
+                const u1 = parseInt(v1.value), u2 = parseInt(v2.value), uRes = parseInt(res.value), uOp = op.value;
+                const isOpMatch = uOp === expected[1];
+                const isResMatch = uRes === expected[3];
                 let isInputsMatch = false;
-                // Commutative Check for + and ×
+
                 if (expected[1] === '+' || expected[1] === '×') {
                     isInputsMatch = (u1 === expected[0] && u2 === expected[2]) || (u1 === expected[2] && u2 === expected[0]);
                 } else {
@@ -578,14 +637,8 @@ html, body { margin: 0; padding: 0; background: var(--pasture); color: var(--ink
             };
             group.appendChild(btn);
         } else {
-            // Populate values if disabled via finishing the other scenario
-            if (forceDisabled && !state.stepsDone[id]) {
-                v1.placeholder = "?"; v2.placeholder = "?"; res.placeholder = "?";
-            } else {
-                v1.value = expected[0]; op.value = expected[1]; v2.value = expected[2]; res.value = expected[3];
-                group.appendChild(document.createTextNode(" ✓"));
-            }
-            v1.disabled = op.disabled = v2.disabled = res.disabled = true;
+            v1.value = expected[0]; op.value = expected[1]; v2.value = expected[2]; res.value = expected[3];
+            v1.disabled = op.disabled = v2.disabled = res.disabled = true; group.appendChild(document.createTextNode(" ✓"));
         }
         container.appendChild(group); return container;
     }
