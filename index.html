@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Excess and Shortage — Code 13</title>
+<title>Excess and Shortage — Code 14</title>
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@500;700&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@500;600&display=swap" rel="stylesheet" />
@@ -155,20 +155,10 @@ html, body { margin: 0; padding: 0; background: var(--pasture); color: var(--ink
 .final-eq-row { display: flex; align-items: center; gap: 15px; margin-bottom: 12px; font-family: var(--font-mono); font-size: 20px; flex-wrap: wrap; }
 
 .feedback-panel { 
-    z-index: 2000; 
-    padding: 12px 18px; 
-    border-radius: 8px; 
-    font-size: 16px; 
-    font-weight: 700; 
-    display: flex; 
-    align-items: center; 
-    justify-content: space-between; 
-    gap: 15px; 
-    border: 2px solid var(--cross-red); 
-    background: var(--cross-red-soft); 
-    color: var(--cross-red);
-    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
-    pointer-events: auto;
+    z-index: 2000; padding: 12px 18px; border-radius: 8px; font-size: 16px; font-weight: 700; 
+    display: flex; align-items: center; justify-content: space-between; gap: 15px; 
+    border: 2px solid var(--cross-red); background: var(--cross-red-soft); color: var(--cross-red);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.15); pointer-events: auto;
 }
 
 .celebrate { margin-top: 30px; padding: 30px; text-align: center; border: 5px solid var(--tick-green); background: white; border-radius: var(--radius); }
@@ -236,8 +226,8 @@ html, body { margin: 0; padding: 0; background: var(--pasture); color: var(--ink
             </div>
         </div>
         <div class="controls-row" id="barControls">
-            <button class="btn btn-ghost" id="removeBarBtn">Remove -1 Sweet</button>
-            <button class="btn btn-ghost" id="addBarBtn">Add +1 Sweet</button>
+            <button class="btn btn-ghost" id="removeBarBtn">Remove -1 Item</button>
+            <button class="btn btn-ghost" id="addBarBtn">Add +1 Item</button>
         </div>
         <div id="barSuccessMsg" class="scaffold-msg hidden"></div>
         <div id="scaffoldSteps"></div>
@@ -254,25 +244,25 @@ html, body { margin: 0; padding: 0; background: var(--pasture); color: var(--ink
 (function() {
     const PROBLEMS = [
         {
-            id: "a1", tabLabel: "A1", storageKey: "esa_a1_v17", personName: "Edric", itemName: "sweets", itemNameSingular: "sweet", groupNoun: "friends", groupNounSingular: "Friend",
+            id: "a1", tabLabel: "A1", storageKey: "esa_a1_v18", personName: "Edric", itemName: "sweets", itemNameSingular: "sweet", groupNoun: "friends", groupNounSingular: "Friend",
             questionText: "<strong>Edric</strong> has some sweets to give to <strong>his friends</strong>. If he gives each friend <strong>3 sweets</strong>, he has <strong>23 sweets left</strong>. If he gives each friend <strong>7 sweets</strong>, he has <strong>3 sweets left</strong>. How many sweets does Edric have?",
             lowRate: 3, lowLeftover: 23, highRate: 7, highRemainder: 3, highType: "extra",
             answerGroups: 5, answerTotal: 38, bigDifference: 20, smallDifference: 4
         },
         {
-            id: "a2", tabLabel: "A2", storageKey: "esa_a2_v17", personName: "Celeste", itemName: "marbles", itemNameSingular: "marble", groupNoun: "cousins", groupNounSingular: "Cousin",
+            id: "a2", tabLabel: "A2", storageKey: "esa_a2_v18", personName: "Celeste", itemName: "marbles", itemNameSingular: "marble", groupNoun: "cousins", groupNounSingular: "Cousin",
             questionText: "<strong>Celeste</strong> has some marbles to share among her <strong>cousins</strong>. If she gives each cousin <strong>4 marbles</strong>, she has <strong>29 marbles left</strong>. If she gives each cousin <strong>10 marbles</strong>, she has <strong>5 marbles left</strong>. How many marbles does Celeste have?",
             lowRate: 4, lowLeftover: 29, highRate: 10, highRemainder: 5, highType: "extra",
             answerGroups: 4, answerTotal: 45, bigDifference: 24, smallDifference: 6
         },
         {
-            id: "b1", tabLabel: "B1", storageKey: "esa_b1_v17", personName: "Edric", itemName: "sweets", itemNameSingular: "sweet", groupNoun: "friends", groupNounSingular: "Friend",
+            id: "b1", tabLabel: "B1", storageKey: "esa_b1_v18", personName: "Edric", itemName: "sweets", itemNameSingular: "sweet", groupNoun: "friends", groupNounSingular: "Friend",
             questionText: "<strong>Edric</strong> has some sweets to give to <strong>his friends</strong>. If he gives each friend <strong>3 sweets</strong>, he has <strong>23 sweets left</strong>. If he gives each friend <strong>7 sweets</strong>, he is <strong>short of 5 sweets</strong>. How many sweets does Edric have?",
             lowRate: 3, lowLeftover: 23, highRate: 7, highRemainder: 5, highType: "short",
             answerGroups: 7, answerTotal: 44, bigDifference: 28, smallDifference: 4
         },
         {
-            id: "b2", tabLabel: "B2", storageKey: "esa_b2_v17", personName: "Celeste", itemName: "marbles", itemNameSingular: "marble", groupNoun: "cousins", groupNounSingular: "Cousin",
+            id: "b2", tabLabel: "B2", storageKey: "esa_b2_v18", personName: "Celeste", itemName: "marbles", itemNameSingular: "marble", groupNoun: "cousins", groupNounSingular: "Cousin",
             questionText: "<strong>Celeste</strong> has some marbles to share among her <strong>cousins</strong>. If she gives each cousin <strong>4 marbles</strong>, she has <strong>29 marbles left</strong>. If she gives each cousin <strong>10 marbles</strong>, she is <strong>short of 7 marbles</strong>. How many marbles does Celeste have?",
             lowRate: 4, lowLeftover: 29, highRate: 10, highRemainder: 7, highType: "short",
             answerGroups: 6, answerTotal: 53, bigDifference: 36, smallDifference: 6
@@ -533,18 +523,22 @@ html, body { margin: 0; padding: 0; background: var(--pasture); color: var(--ink
 
     function renderFinalTotalAlternative() {
         const div = document.createElement('div'); div.className = "scaffold-step-row"; div.style.flexDirection = "column"; div.style.alignItems = "flex-start";
-        div.innerHTML = `<label class="scaffold-label-inline" style="margin-bottom:20px;">How many ${currentProblem.itemName} are there?</label>`;
+        div.innerHTML = `<label class="scaffold-label-inline" style="margin-bottom:20px;">Final calculation for Total ${currentProblem.itemName}:</label>`;
         
-        div.appendChild(createEqRow("step4a1", `Given to ${currentProblem.groupNoun} :`, [currentProblem.answerGroups, '×', currentProblem.lowRate, currentProblem.answerGroups * currentProblem.lowRate], 4, true));
-        div.appendChild(createEqRow("step4a2", `Total ${currentProblem.itemName} (including Extra / removing Shortage) :`, [currentProblem.answerGroups * currentProblem.lowRate, '+', currentProblem.lowLeftover, currentProblem.answerTotal], 4, true));
+        // Option 1 Path
+        const path1Finished = state.stepsDone['step4a2'];
+        div.appendChild(createEqRow("step4a1", `Scenario 1: Given to ${currentProblem.groupNoun} :`, [currentProblem.answerGroups, '×', currentProblem.lowRate, currentProblem.answerGroups * currentProblem.lowRate], 4, true, path1Finished));
+        div.appendChild(createEqRow("step4a2", `Total ${currentProblem.itemName} (+ Extra) :`, [currentProblem.answerGroups * currentProblem.lowRate, '+', currentProblem.lowLeftover, currentProblem.answerTotal], 4, true));
 
         div.innerHTML += `<div class="or-divider">OR</div>`;
 
+        // Option 2 Path
+        const path2Finished = state.stepsDone['step4b2'];
         const hOp = currentProblem.highType === 'extra' ? '+' : '-';
-        div.appendChild(createEqRow("step4b1", `Given to ${currentProblem.groupNoun} :`, [currentProblem.answerGroups, '×', currentProblem.highRate, currentProblem.answerGroups * currentProblem.highRate], 4, true));
-        div.appendChild(createEqRow("step4b2", `Total ${currentProblem.itemName} (including Extra / removing Shortage) :`, [currentProblem.answerGroups * currentProblem.highRate, hOp, currentProblem.highRemainder, currentProblem.answerTotal], 4, true));
+        div.appendChild(createEqRow("step4b1", `Scenario 2: Given to ${currentProblem.groupNoun} :`, [currentProblem.answerGroups, '×', currentProblem.highRate, currentProblem.answerGroups * currentProblem.highRate], 4, true, path2Finished));
+        div.appendChild(createEqRow("step4b2", `Total ${currentProblem.itemName} (${currentProblem.highType === 'extra' ? '+' : '-'} ${currentProblem.highType.charAt(0).toUpperCase() + currentProblem.highType.slice(1)}) :`, [currentProblem.answerGroups * currentProblem.highRate, hOp, currentProblem.highRemainder, currentProblem.answerTotal], 4, true));
 
-        if (state.stepsDone['step4b2']) {
+        if (state.stepsDone['step4a2'] || state.stepsDone['step4b2']) {
              const cel = document.createElement('div'); cel.className = "celebrate";
              cel.innerHTML = `<h2>Correct!</h2><p>${currentProblem.personName} has ${currentProblem.answerTotal} ${currentProblem.itemName}.</p>`;
              div.appendChild(cel);
@@ -552,11 +546,11 @@ html, body { margin: 0; padding: 0; background: var(--pasture); color: var(--ink
         el.scaffoldSteps.appendChild(div);
     }
 
-    function createEqRow(id, label, expected, stepIdx, subRow = false) {
+    function createEqRow(id, label, expected, stepIdx, subRow = false, forceDisabled = false) {
         const container = document.createElement('div'); container.className = subRow ? "final-eq-row" : "scaffold-step-row";
         container.innerHTML = `<span class="scaffold-label-inline">${label}</span>`;
         const group = document.createElement('div'); group.className = "eq-group";
-        const isDone = state.stepsDone[id];
+        const isDone = state.stepsDone[id] || forceDisabled;
 
         const v1 = createEqInput(isDone); const op = createEqSelect(isDone); const v2 = createEqInput(isDone); const res = createEqInput(isDone);
         group.appendChild(v1); group.appendChild(op); group.appendChild(v2); group.appendChild(document.createTextNode(" = ")); group.appendChild(res);
@@ -569,6 +563,7 @@ html, body { margin: 0; padding: 0; background: var(--pasture); color: var(--ink
                 const isResMatch = uRes === expected[3];
                 
                 let isInputsMatch = false;
+                // Commutative Check for + and ×
                 if (expected[1] === '+' || expected[1] === '×') {
                     isInputsMatch = (u1 === expected[0] && u2 === expected[2]) || (u1 === expected[2] && u2 === expected[0]);
                 } else {
@@ -583,8 +578,14 @@ html, body { margin: 0; padding: 0; background: var(--pasture); color: var(--ink
             };
             group.appendChild(btn);
         } else {
-            v1.value = expected[0]; op.value = expected[1]; v2.value = expected[2]; res.value = expected[3];
-            v1.disabled = op.disabled = v2.disabled = res.disabled = true; group.appendChild(document.createTextNode(" ✓"));
+            // Populate values if disabled via finishing the other scenario
+            if (forceDisabled && !state.stepsDone[id]) {
+                v1.placeholder = "?"; v2.placeholder = "?"; res.placeholder = "?";
+            } else {
+                v1.value = expected[0]; op.value = expected[1]; v2.value = expected[2]; res.value = expected[3];
+                group.appendChild(document.createTextNode(" ✓"));
+            }
+            v1.disabled = op.disabled = v2.disabled = res.disabled = true;
         }
         container.appendChild(group); return container;
     }
