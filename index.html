@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Excess and Shortage — Code 8</title>
+<title>Excess and Shortage — Code 9</title>
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@500;700&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@500;600&display=swap" rel="stylesheet" />
@@ -129,8 +129,8 @@ html, body { margin: 0; padding: 0; background: var(--pasture); color: var(--ink
 .final-label { display: block; font-weight: 700; margin-bottom: 10px; font-size: 24px; }
 .final-eq-row { display: flex; align-items: center; gap: 15px; margin-bottom: 10px; font-family: var(--font-mono); font-size: 28px; }
 
-.feedback-panel { margin-top: 10px; padding: 12px; border-radius: 8px; font-size: 18px; font-weight: 600; display: flex; align-items: center; justify-content: space-between; gap: 10px; }
-.feedback-panel.bad { background: var(--cross-red-soft); color: var(--cross-red); border: 2px solid var(--cross-red); }
+.feedback-panel { margin-top: 10px; padding: 12px; border-radius: 8px; font-size: 18px; font-weight: 600; display: flex; align-items: center; justify-content: space-between; gap: 10px; border: 2px solid var(--cross-red); }
+.feedback-panel.bad { background: var(--cross-red-soft); color: var(--cross-red); }
 .skip-link { font-size: 14px; text-decoration: underline; color: var(--ink-soft); cursor: pointer; opacity: 0.6; margin-left: 10px; font-family: var(--font-body); }
 
 .celebrate { margin-top: 30px; padding: 30px; text-align: center; border: 5px solid var(--tick-green); background: white; border-radius: var(--radius); }
@@ -262,25 +262,25 @@ html, body { margin: 0; padding: 0; background: var(--pasture); color: var(--ink
 (function() {
     const PROBLEMS = [
         {
-            id: "a1", tabLabel: "A1", storageKey: "esa_a1_v11", personName: "Edric", itemName: "sweets", groupNoun: "friends", groupNounSingular: "Friend",
+            id: "a1", tabLabel: "A1", storageKey: "esa_a1_v12", personName: "Edric", itemName: "sweets", groupNoun: "friends", groupNounSingular: "Friend",
             questionText: "<strong>Edric</strong> has some sweets to give to <strong>his friends</strong>. If he gives each friend <strong>3 sweets</strong>, he has <strong>23 sweets left</strong>. If he gives each friend <strong>7 sweets</strong>, he has <strong>3 sweets left</strong>. How many sweets does Edric have?",
             lowRate: 3, lowLeftover: 23, highRate: 7, highRemainder: 3, highType: "extra",
             answerGroups: 5, answerTotal: 38, bigDifference: 20, smallDifference: 4, whyAnswer: "7-3", slideDirection: "remove", slideSteps: 3
         },
         {
-            id: "a2", tabLabel: "A2", storageKey: "esa_a2_v11", personName: "Celeste", itemName: "marbles", groupNoun: "cousins", groupNounSingular: "Cousin",
+            id: "a2", tabLabel: "A2", storageKey: "esa_a2_v12", personName: "Celeste", itemName: "marbles", groupNoun: "cousins", groupNounSingular: "Cousin",
             questionText: "<strong>Celeste</strong> has some marbles to share among her <strong>cousins</strong>. If she gives each cousin <strong>4 marbles</strong>, she has <strong>29 marbles left</strong>. If she gives each cousin <strong>10 marbles</strong>, she has <strong>5 marbles left</strong>. How many marbles does Celeste have?",
             lowRate: 4, lowLeftover: 29, highRate: 10, highRemainder: 5, highType: "extra",
             answerGroups: 4, answerTotal: 45, bigDifference: 24, smallDifference: 6, whyAnswer: "10-4", slideDirection: "remove", slideSteps: 5
         },
         {
-            id: "b1", tabLabel: "B1", storageKey: "esa_b1_v11", personName: "Edric", itemName: "sweets", groupNoun: "friends", groupNounSingular: "Friend",
+            id: "b1", tabLabel: "B1", storageKey: "esa_b1_v12", personName: "Edric", itemName: "sweets", groupNoun: "friends", groupNounSingular: "Friend",
             questionText: "<strong>Edric</strong> has some sweets to give to <strong>his friends</strong>. If he gives each friend <strong>3 sweets</strong>, he has <strong>23 sweets left</strong>. If he gives each friend <strong>7 sweets</strong>, he is <strong>short of 5 sweets</strong>. How many sweets does Edric have?",
             lowRate: 3, lowLeftover: 23, highRate: 7, highRemainder: 5, highType: "short",
             answerGroups: 7, answerTotal: 44, bigDifference: 28, smallDifference: 4, whyAnswer: "7-3", slideDirection: "add", slideSteps: 5
         },
         {
-            id: "b2", tabLabel: "B2", storageKey: "esa_b2_v11", personName: "Celeste", itemName: "marbles", groupNoun: "cousins", groupNounSingular: "Cousin",
+            id: "b2", tabLabel: "B2", storageKey: "esa_b2_v12", personName: "Celeste", itemName: "marbles", groupNoun: "cousins", groupNounSingular: "Cousin",
             questionText: "<strong>Celeste</strong> has some marbles to share among her <strong>cousins</strong>. If she gives each cousin <strong>4 marbles</strong>, she has <strong>29 marbles left</strong>. If she gives each cousin <strong>10 marbles</strong>, she is <strong>short of 7 marbles</strong>. How many marbles does Celeste have?",
             lowRate: 4, lowLeftover: 29, highRate: 10, highRemainder: 7, highType: "short",
             answerGroups: 6, answerTotal: 53, bigDifference: 36, smallDifference: 6, whyAnswer: "10-4", slideDirection: "add", slideSteps: 7
@@ -396,8 +396,8 @@ html, body { margin: 0; padding: 0; background: var(--pasture); color: var(--ink
         el.groupNounLabel.innerText = `Number of ${currentProblem.groupNoun}`;
         el.addBtn.innerText = `+ Add +1 ${currentProblem.groupNounSingular}`;
         
-        const isSolved = checkSolvedLogic();
-        el.tableControls.classList.toggle('hidden', isSolved && !state.demoMode);
+        const solved = checkSolvedLogic();
+        el.tableControls.classList.toggle('hidden', solved && !state.demoMode);
 
         const highColorClass = currentProblem.highType === 'extra' ? 'header-extra' : 'header-short';
         el.tableHead.innerHTML = `
@@ -413,8 +413,6 @@ html, body { margin: 0; padding: 0; background: var(--pasture); color: var(--ink
         `;
 
         el.colDiffStyle.classList.toggle('hidden', !state.scaffoldActive);
-        
-        // Ensure Counter Sync
         const max = state.rows.length ? Math.max(...state.rows.map(r => r.n)) : 1;
         el.groupInput.value = max;
 
@@ -525,8 +523,7 @@ html, body { margin: 0; padding: 0; background: var(--pasture); color: var(--ink
     function processProgression(row) {
         const t1 = row.n * currentProblem.lowRate + currentProblem.lowLeftover;
         const t2 = currentProblem.highType === 'extra' ? (row.n * currentProblem.highRate + currentProblem.highRemainder) : (row.n * currentProblem.highRate - currentProblem.highRemainder);
-        const rowIsComplete = (state.demoMode || (row.v1 === t1 && row.v2 === t2));
-        if (rowIsComplete) {
+        if ((state.demoMode || (row.v1 === t1 && row.v2 === t2))) {
             if (t1 === t2) renderAll();
             else if (!state.demoMode) {
                 const lastRow = state.rows[state.rows.length - 1];
@@ -577,19 +574,15 @@ html, body { margin: 0; padding: 0; background: var(--pasture); color: var(--ink
 
     function renderFinalSteps() {
         const isSolved = checkSolvedLogic();
-        // Modification: Hide Final Questions if Big & Small Difference is active
         if (!isSolved || state.scaffoldActive) { el.finalArea.classList.add('hidden'); return; }
-        
         el.finalArea.classList.remove('hidden');
         el.fGroupsLabel.innerText = `How many ${currentProblem.groupNoun} does ${currentProblem.personName} have?`;
         el.fTotalsLabel.innerText = `How many ${currentProblem.itemName} does ${currentProblem.personName} have?`;
-        
         const n = currentProblem.answerGroups;
         el.eq1Label.innerHTML = `<span class="op-extra">${currentProblem.lowRate} each:</span> ${n} × ${currentProblem.lowRate} + ${currentProblem.lowLeftover} =`;
         const highOp = currentProblem.highType === 'extra' ? '+' : '-';
         const highColor = currentProblem.highType === 'extra' ? 'op-extra' : 'op-short';
         el.eq2Label.innerHTML = `<span class="${highColor}">${currentProblem.highRate} each:</span> ${n} × ${currentProblem.highRate} ${highOp} ${currentProblem.highRemainder} =`;
-
         el.fGroupsSkip.classList.toggle('hidden', !state.demoMode);
         el.fTotal1Skip.classList.toggle('hidden', !state.demoMode);
         el.fTotal2Skip.classList.toggle('hidden', !state.demoMode);
@@ -599,22 +592,15 @@ html, body { margin: 0; padding: 0; background: var(--pasture); color: var(--ink
             el.fGroupsBtn.classList.add('hidden'); el.fGroupsSkip.classList.add('hidden');
             el.fTotalsStep.classList.remove('hidden');
         } else {
-            el.fGroupsInput.disabled = false; el.fGroupsBtn.classList.remove('hidden');
-            el.fTotalsStep.classList.add('hidden');
+            el.fGroupsInput.disabled = false; el.fGroupsBtn.classList.remove('hidden'); el.fTotalsStep.classList.add('hidden');
         }
-
         if (state.finalTotal1Done) { el.fTotal1Input.value = currentProblem.answerTotal; el.fTotal1Input.disabled = true; el.fTotal1Btn.classList.add('hidden'); el.fTotal1Skip.classList.add('hidden'); }
         else { el.fTotal1Input.disabled = false; el.fTotal1Btn.classList.remove('hidden'); }
-        
         if (state.finalTotal2Done) { el.fTotal2Input.value = currentProblem.answerTotal; el.fTotal2Input.disabled = true; el.fTotal2Btn.classList.add('hidden'); el.fTotal2Skip.classList.add('hidden'); }
         else { el.fTotal2Input.disabled = false; el.fTotal2Btn.classList.remove('hidden'); }
 
         if (state.finalTotal1Done && state.finalTotal2Done) {
-            el.finalCelebrate.innerHTML = `
-                <h2 class="brand" style="font-size:40px;">Correct!</h2>
-                <p style="font-size:32px; font-weight:700; font-family:var(--font-mono);">${currentProblem.personName} has ${currentProblem.answerTotal} ${currentProblem.itemName}.</p>
-                <p style="font-size:20px; color:var(--ink-soft);">You've found the final answer! Press 'Reset Problem' if you want to try again.</p>
-            `;
+            el.finalCelebrate.innerHTML = `<h2 class="brand" style="font-size:40px;">Correct!</h2><p style="font-size:32px; font-weight:700; font-family:var(--font-mono);">${currentProblem.personName} has ${currentProblem.answerTotal} ${currentProblem.itemName}.</p><p style="font-size:20px; color:var(--ink-soft);">Press 'Reset Problem' if you want to try again.</p>`;
             el.finalCelebrate.classList.remove('hidden');
         } else { el.finalCelebrate.classList.add('hidden'); }
     }
@@ -638,13 +624,9 @@ html, body { margin: 0; padding: 0; background: var(--pasture); color: var(--ink
         const existing = document.getElementById('fb_' + id); if (existing) existing.remove();
         const div = document.createElement('div'); div.id = 'fb_' + id; div.className = "feedback-panel bad";
         div.innerHTML = `<span>${msg}</span><button class="btn btn-ghost btn-check">Retry</button>`;
-        div.querySelector('button').onclick = () => {
-            div.remove();
-            if (targetInput) { targetInput.value = ""; targetInput.focus(); }
-        };
+        div.querySelector('button').onclick = () => { div.remove(); if (targetInput) { targetInput.value = ""; targetInput.focus(); } };
         document.body.appendChild(div);
-        const refEl = targetInput || document.activeElement;
-        const rect = refEl.getBoundingClientRect();
+        const rect = (targetInput || document.activeElement).getBoundingClientRect();
         div.style.position = 'fixed'; div.style.top = (rect.bottom + window.scrollY + 10) + 'px';
         div.style.left = Math.max(10, rect.left - 50) + 'px'; div.style.zIndex = 1000; div.style.boxShadow = "0 10px 25px rgba(0,0,0,0.2)";
     }
@@ -686,10 +668,8 @@ html, body { margin: 0; padding: 0; background: var(--pasture); color: var(--ink
             localStorage.removeItem(currentProblem.storageKey); 
             state = getDefaultState();
             el.demoToggle.checked = false;
-            // Clear all final inputs manually
             el.fGroupsInput.value = ""; el.fTotal1Input.value = ""; el.fTotal2Input.value = "";
-            save();
-            renderAll();
+            save(); renderAll();
             document.querySelectorAll('.feedback-panel').forEach(p => p.remove());
         }
     }
