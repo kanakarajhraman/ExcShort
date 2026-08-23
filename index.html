@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Excess and Shortage — Code 4</title>
+<title>Excess and Shortage — Code 5</title>
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@500;700&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@500;600&display=swap" rel="stylesheet" />
@@ -46,7 +46,7 @@ html, body { margin: 0; padding: 0; background: var(--pasture); color: var(--ink
 }
 .tab-btn.active { background: var(--paper); color: var(--ink); font-weight: 700; border-color: var(--amber); }
 
-.admin-row { display: flex; align-items: center; justify-content: center; gap: 20px; margin-bottom: 15px; }
+.admin-row { display: flex; align-items: center; justify-content: center; gap: 15px; margin-bottom: 15px; flex-wrap: wrap; }
 
 .card { background: var(--paper); border: 1px solid var(--line); border-radius: var(--radius); padding: 20px; box-shadow: 0 4px 10px rgba(0,0,0,0.05); margin-bottom: 20px; }
 .problem-card { border-left: 10px solid var(--amber); }
@@ -162,6 +162,7 @@ html, body { margin: 0; padding: 0; background: var(--pasture); color: var(--ink
         <label class="demo-toggle-wrap">
             <input type="checkbox" id="demoToggle"> Teacher Mode
         </label>
+        <button class="btn btn-toggle hidden" id="scaffoldBtn">Big & Small Difference</button>
         <button class="btn btn-ghost btn-danger" id="resetBtn">Reset Problem</button>
     </div>
 
@@ -191,10 +192,6 @@ html, body { margin: 0; padding: 0; background: var(--pasture); color: var(--ink
         </table>
     </div>
 
-    <div style="text-align: center; margin-bottom: 20px;">
-        <button class="btn btn-toggle hidden" id="scaffoldBtn">Big & Small Difference</button>
-    </div>
-
     <section id="scaffoldArea" class="scaffold-panel hidden">
         <div class="gap-readout" id="gapReadout">Gap: --</div>
         <div class="visual-area">
@@ -222,13 +219,13 @@ html, body { margin: 0; padding: 0; background: var(--pasture); color: var(--ink
             <div class="controls-row">
                 <input type="text" id="whyInput" class="num-input" style="width: 300px; text-align: left;">
                 <button class="btn btn-primary" id="whyCheckBtn">Check</button>
-                <span id="whySkip" class="skip-link hidden" id="whySkipLink">Skip</span>
+                <span class="skip-link hidden" id="whySkipLink">Skip</span>
             </div>
             <div id="whyFeedback" class="feedback-panel hidden"></div>
         </div>
     </section>
 
-    <!-- FINAL STEPS SECTION -->
+    <!-- FINAL STEPS SECTION (Appears automatically when solved) -->
     <section id="finalStepsArea" class="card final-steps-area hidden">
         <h3 class="brand" style="font-size:32px; margin-bottom:20px;">Final Answer Steps</h3>
         
@@ -265,25 +262,25 @@ html, body { margin: 0; padding: 0; background: var(--pasture); color: var(--ink
 (function() {
     const PROBLEMS = [
         {
-            id: "a1", tabLabel: "A1", storageKey: "esa_a1_v6", personName: "Edric", itemName: "sweets", groupNoun: "friends", groupNounSingular: "Friend",
+            id: "a1", tabLabel: "A1", storageKey: "esa_a1_v8", personName: "Edric", itemName: "sweets", groupNoun: "friends", groupNounSingular: "Friend",
             questionText: "<strong>Edric</strong> has some sweets to give to <strong>his friends</strong>. If he gives each friend <strong>3 sweets</strong>, he has <strong>23 sweets left</strong>. If he gives each friend <strong>7 sweets</strong>, he has <strong>3 sweets left</strong>. How many sweets does Edric have?",
             lowRate: 3, lowLeftover: 23, highRate: 7, highRemainder: 3, highType: "extra",
             answerGroups: 5, answerTotal: 38, bigDifference: 20, smallDifference: 4, whyAnswer: "7-3", slideDirection: "remove", slideSteps: 3
         },
         {
-            id: "a2", tabLabel: "A2", storageKey: "esa_a2_v6", personName: "Celeste", itemName: "marbles", groupNoun: "cousins", groupNounSingular: "Cousin",
+            id: "a2", tabLabel: "A2", storageKey: "esa_a2_v8", personName: "Celeste", itemName: "marbles", groupNoun: "cousins", groupNounSingular: "Cousin",
             questionText: "<strong>Celeste</strong> has some marbles to share among her <strong>cousins</strong>. If she gives each cousin <strong>4 marbles</strong>, she has <strong>29 marbles left</strong>. If she gives each cousin <strong>10 marbles</strong>, she has <strong>5 marbles left</strong>. How many marbles does Celeste have?",
             lowRate: 4, lowLeftover: 29, highRate: 10, highRemainder: 5, highType: "extra",
             answerGroups: 4, answerTotal: 45, bigDifference: 24, smallDifference: 6, whyAnswer: "10-4", slideDirection: "remove", slideSteps: 5
         },
         {
-            id: "b1", tabLabel: "B1", storageKey: "esa_b1_v6", personName: "Edric", itemName: "sweets", groupNoun: "friends", groupNounSingular: "Friend",
+            id: "b1", tabLabel: "B1", storageKey: "esa_b1_v8", personName: "Edric", itemName: "sweets", groupNoun: "friends", groupNounSingular: "Friend",
             questionText: "<strong>Edric</strong> has some sweets to give to <strong>his friends</strong>. If he gives each friend <strong>3 sweets</strong>, he has <strong>23 sweets left</strong>. If he gives each friend <strong>7 sweets</strong>, he is <strong>short of 5 sweets</strong>. How many sweets does Edric have?",
             lowRate: 3, lowLeftover: 23, highRate: 7, highRemainder: 5, highType: "short",
             answerGroups: 7, answerTotal: 44, bigDifference: 28, smallDifference: 4, whyAnswer: "7-3", slideDirection: "add", slideSteps: 5
         },
         {
-            id: "b2", tabLabel: "B2", storageKey: "esa_b2_v6", personName: "Celeste", itemName: "marbles", groupNoun: "cousins", groupNounSingular: "Cousin",
+            id: "b2", tabLabel: "B2", storageKey: "esa_b2_v8", personName: "Celeste", itemName: "marbles", groupNoun: "cousins", groupNounSingular: "Cousin",
             questionText: "<strong>Celeste</strong> has some marbles to share among her <strong>cousins</strong>. If she gives each cousin <strong>4 marbles</strong>, she has <strong>29 marbles left</strong>. If she gives each cousin <strong>10 marbles</strong>, she is <strong>short of 7 marbles</strong>. How many marbles does Celeste have?",
             lowRate: 4, lowLeftover: 29, highRate: 10, highRemainder: 7, highType: "short",
             answerGroups: 6, answerTotal: 53, bigDifference: 36, smallDifference: 6, whyAnswer: "10-4", slideDirection: "add", slideSteps: 7
@@ -355,7 +352,6 @@ html, body { margin: 0; padding: 0; background: var(--pasture); color: var(--ink
         el.whyCheck.onclick = checkWhy;
         el.whySkip.onclick = () => { completeWhy(currentProblem.whyAnswer); };
 
-        // Final Step Events
         el.fGroupsBtn.onclick = () => checkFinalStep('groups', parseInt(el.fGroupsInput.value), currentProblem.answerGroups);
         el.fGroupsSkip.onclick = () => checkFinalStep('groups', currentProblem.answerGroups, currentProblem.answerGroups);
         el.fTotal1Btn.onclick = () => checkFinalStep('total1', parseInt(el.fTotal1Input.value), currentProblem.answerTotal);
@@ -367,11 +363,15 @@ html, body { margin: 0; padding: 0; background: var(--pasture); color: var(--ink
     function loadProblem(p) {
         currentProblem = p;
         const saved = localStorage.getItem(p.storageKey);
-        state = saved ? JSON.parse(saved) : { 
-            rows: [], scaffoldActive: false, barOffset: 0, barDone: false, 
-            diffInputs: {}, attempts: {}, whyDone: false, demoMode: false,
-            finalGroupsDone: false, finalTotal1Done: false, finalTotal2Done: false
-        };
+        if (saved) {
+            state = JSON.parse(saved);
+        } else {
+            state = { 
+                rows: [], scaffoldActive: false, barOffset: 0, barDone: false, 
+                diffInputs: {}, attempts: {}, whyDone: false, demoMode: false,
+                finalGroupsDone: false, finalTotal1Done: false, finalTotal2Done: false
+            };
+        }
         el.demoToggle.checked = state.demoMode;
         renderAll();
     }
@@ -527,12 +527,12 @@ html, body { margin: 0; padding: 0; background: var(--pasture); color: var(--ink
     }
 
     function checkSolved() {
-        const solved = state.rows.find(r => {
+        const isSolved = state.rows.some(r => {
             const t1 = r.n * currentProblem.lowRate + currentProblem.lowLeftover;
             const t2 = currentProblem.highType === 'extra' ? (r.n * currentProblem.highRate + currentProblem.highRemainder) : (r.n * currentProblem.highRate - currentProblem.highRemainder);
             return (state.demoMode || (r.v1 === t1 && r.v2 === t2)) && (t1 === t2);
         });
-        if (solved) {
+        if (isSolved) {
             updateScaffoldVisibility();
             renderFinalSteps();
         }
@@ -545,6 +545,7 @@ html, body { margin: 0; padding: 0; background: var(--pasture); color: var(--ink
             return (state.demoMode || (r.v1 === t1 && r.v2 === t2)) && (t1 === t2);
         });
         el.scaffoldBtn.classList.toggle('hidden', !(state.demoMode || isSolved));
+        el.scaffoldBtn.classList.toggle('active', state.scaffoldActive);
     }
 
     function toggleScaffold() {
@@ -556,12 +557,15 @@ html, body { margin: 0; padding: 0; background: var(--pasture); color: var(--ink
     }
 
     function renderScaffold() {
-        el.scaffoldArea.classList.remove('hidden'); el.scaffoldBtn.classList.add('active');
+        el.scaffoldArea.classList.toggle('hidden', !state.scaffoldActive);
+        if (!state.scaffoldActive) return;
+
         const b1Base = currentProblem.lowLeftover, b2Base = currentProblem.highType === 'extra' ? currentProblem.highRemainder : -currentProblem.highRemainder;
         const cur1 = b1Base + state.barOffset, cur2 = b2Base + state.barOffset;
         updateBar(el.bar1, cur1, 5, document.getElementById('bar1LabelTop'), document.getElementById('bar1LabelBot'));
         updateBar(el.bar2, cur2, 5, document.getElementById('bar2LabelTop'), document.getElementById('bar2LabelBot'));
         el.gapReadout.innerText = `Gap: ${Math.abs(cur1 - cur2)}`;
+        
         if (cur2 === 0 && !state.barDone) {
             state.barDone = true; el.barSuccess.innerHTML = `The ${currentProblem.highRate} each bar is now at zero. The other bar shows the Big Difference: ${currentProblem.bigDifference}.`;
             el.barSuccess.classList.remove('hidden'); el.addBar.disabled = el.removeBar.disabled = el.undoBar.disabled = true;
@@ -605,7 +609,7 @@ html, body { margin: 0; padding: 0; background: var(--pasture); color: var(--ink
     function completeWhy(val) {
         state.whyDone = true; el.whyInput.value = val; el.whyInput.disabled = true; el.whyCheck.classList.add('hidden');
         el.whySkip.classList.add('hidden'); el.whyFeedback.classList.add('hidden'); save();
-        checkSolved(); // Ensure celebration triggers if table already solved
+        checkSolved();
     }
 
     function renderFinalSteps() {
@@ -627,7 +631,6 @@ html, body { margin: 0; padding: 0; background: var(--pasture); color: var(--ink
         const highColor = currentProblem.highType === 'extra' ? 'op-extra' : 'op-short';
         el.eq2Label.innerHTML = `<span class="${highColor}">${currentProblem.highRate} each:</span> ${n} × ${currentProblem.highRate} ${highOp} ${currentProblem.highRemainder} =`;
 
-        // Sync state to inputs
         el.fGroupsSkip.classList.toggle('hidden', !state.demoMode);
         el.fTotal1Skip.classList.toggle('hidden', !state.demoMode);
         el.fTotal2Skip.classList.toggle('hidden', !state.demoMode);
@@ -687,7 +690,16 @@ html, body { margin: 0; padding: 0; background: var(--pasture); color: var(--ink
     }
 
     function resetProblem() {
-        if (confirm("Clear all work for this problem?")) { localStorage.removeItem(currentProblem.storageKey); loadProblem(currentProblem); }
+        if (confirm("Reset everything for this problem?")) { 
+            localStorage.removeItem(currentProblem.storageKey); 
+            // Clear current variables manually to avoid state bleed
+            state = { 
+                rows: [], scaffoldActive: false, barOffset: 0, barDone: false, 
+                diffInputs: {}, attempts: {}, whyDone: false, demoMode: false,
+                finalGroupsDone: false, finalTotal1Done: false, finalTotal2Done: false
+            };
+            loadProblem(currentProblem); 
+        }
     }
 
     init();
