@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Excess and Shortage — Code 6</title>
+<title>Excess and Shortage — Code 7</title>
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@500;700&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@500;600&display=swap" rel="stylesheet" />
@@ -262,25 +262,25 @@ html, body { margin: 0; padding: 0; background: var(--pasture); color: var(--ink
 (function() {
     const PROBLEMS = [
         {
-            id: "a1", tabLabel: "A1", storageKey: "esa_a1_v9", personName: "Edric", itemName: "sweets", groupNoun: "friends", groupNounSingular: "Friend",
+            id: "a1", tabLabel: "A1", storageKey: "esa_a1_v10", personName: "Edric", itemName: "sweets", groupNoun: "friends", groupNounSingular: "Friend",
             questionText: "<strong>Edric</strong> has some sweets to give to <strong>his friends</strong>. If he gives each friend <strong>3 sweets</strong>, he has <strong>23 sweets left</strong>. If he gives each friend <strong>7 sweets</strong>, he has <strong>3 sweets left</strong>. How many sweets does Edric have?",
             lowRate: 3, lowLeftover: 23, highRate: 7, highRemainder: 3, highType: "extra",
             answerGroups: 5, answerTotal: 38, bigDifference: 20, smallDifference: 4, whyAnswer: "7-3", slideDirection: "remove", slideSteps: 3
         },
         {
-            id: "a2", tabLabel: "A2", storageKey: "esa_a2_v9", personName: "Celeste", itemName: "marbles", groupNoun: "cousins", groupNounSingular: "Cousin",
+            id: "a2", tabLabel: "A2", storageKey: "esa_a2_v10", personName: "Celeste", itemName: "marbles", groupNoun: "cousins", groupNounSingular: "Cousin",
             questionText: "<strong>Celeste</strong> has some marbles to share among her <strong>cousins</strong>. If she gives each cousin <strong>4 marbles</strong>, she has <strong>29 marbles left</strong>. If she gives each cousin <strong>10 marbles</strong>, she has <strong>5 marbles left</strong>. How many marbles does Celeste have?",
             lowRate: 4, lowLeftover: 29, highRate: 10, highRemainder: 5, highType: "extra",
             answerGroups: 4, answerTotal: 45, bigDifference: 24, smallDifference: 6, whyAnswer: "10-4", slideDirection: "remove", slideSteps: 5
         },
         {
-            id: "b1", tabLabel: "B1", storageKey: "esa_b1_v9", personName: "Edric", itemName: "sweets", groupNoun: "friends", groupNounSingular: "Friend",
+            id: "b1", tabLabel: "B1", storageKey: "esa_b1_v10", personName: "Edric", itemName: "sweets", groupNoun: "friends", groupNounSingular: "Friend",
             questionText: "<strong>Edric</strong> has some sweets to give to <strong>his friends</strong>. If he gives each friend <strong>3 sweets</strong>, he has <strong>23 sweets left</strong>. If he gives each friend <strong>7 sweets</strong>, he is <strong>short of 5 sweets</strong>. How many sweets does Edric have?",
             lowRate: 3, lowLeftover: 23, highRate: 7, highRemainder: 5, highType: "short",
             answerGroups: 7, answerTotal: 44, bigDifference: 28, smallDifference: 4, whyAnswer: "7-3", slideDirection: "add", slideSteps: 5
         },
         {
-            id: "b2", tabLabel: "B2", storageKey: "esa_b2_v9", personName: "Celeste", itemName: "marbles", groupNoun: "cousins", groupNounSingular: "Cousin",
+            id: "b2", tabLabel: "B2", storageKey: "esa_b2_v10", personName: "Celeste", itemName: "marbles", groupNoun: "cousins", groupNounSingular: "Cousin",
             questionText: "<strong>Celeste</strong> has some marbles to share among her <strong>cousins</strong>. If she gives each cousin <strong>4 marbles</strong>, she has <strong>29 marbles left</strong>. If she gives each cousin <strong>10 marbles</strong>, she is <strong>short of 7 marbles</strong>. How many marbles does Celeste have?",
             lowRate: 4, lowLeftover: 29, highRate: 10, highRemainder: 7, highType: "short",
             answerGroups: 6, answerTotal: 53, bigDifference: 36, smallDifference: 6, whyAnswer: "10-4", slideDirection: "add", slideSteps: 7
@@ -366,20 +366,20 @@ html, body { margin: 0; padding: 0; background: var(--pasture); color: var(--ink
         if (saved) {
             state = JSON.parse(saved);
         } else {
-            state = { 
-                rows: [], scaffoldActive: false, barOffset: 0, barDone: false, 
-                diffInputs: {}, attempts: {}, whyDone: false, demoMode: false,
-                finalGroupsDone: false, finalTotal1Done: false, finalTotal2Done: false
-            };
+            state = getDefaultState();
         }
         
-        // Progression requirement: Always start with Row 1 if empty
-        if (state.rows.length === 0) {
-            state.rows.push({ n: 1, v1: null, v2: null, vDiff: null });
-        }
-
         el.demoToggle.checked = state.demoMode;
         renderAll();
+    }
+
+    function getDefaultState() {
+        return { 
+            rows: [{ n: 1, v1: null, v2: null, vDiff: null }], 
+            scaffoldActive: false, barOffset: 0, barDone: false, 
+            diffInputs: {}, attempts: {}, whyDone: false, demoMode: false,
+            finalGroupsDone: false, finalTotal1Done: false, finalTotal2Done: false
+        };
     }
 
     function save() { localStorage.setItem(currentProblem.storageKey, JSON.stringify(state)); }
@@ -401,7 +401,6 @@ html, body { margin: 0; padding: 0; background: var(--pasture); color: var(--ink
         el.groupNounLabel.innerText = `Number of ${currentProblem.groupNoun}`;
         el.addBtn.innerText = `+ Add +1 ${currentProblem.groupNounSingular}`;
         
-        // Hide manual table controls if solved (unless Teacher Mode)
         const isSolved = checkSolvedLogic();
         el.tableControls.classList.toggle('hidden', isSolved && !state.demoMode);
 
@@ -421,7 +420,7 @@ html, body { margin: 0; padding: 0; background: var(--pasture); color: var(--ink
         el.colDiffStyle.classList.toggle('hidden', !state.scaffoldActive);
         renderTable();
         updateScaffoldVisibility();
-        if (state.scaffoldActive) renderScaffold();
+        renderScaffold();
         renderFinalSteps();
     }
 
@@ -532,9 +531,8 @@ html, body { margin: 0; padding: 0; background: var(--pasture); color: var(--ink
 
         if (rowIsComplete) {
             if (solutionFound) {
-                renderAll(); // Will show final steps
+                renderAll(); 
             } else if (!state.demoMode) {
-                // Progression logic: add next row automatically if not solved
                 const lastRow = state.rows[state.rows.length - 1];
                 if (row.n === lastRow.n) {
                     addRow(row.n + 1);
@@ -609,12 +607,15 @@ html, body { margin: 0; padding: 0; background: var(--pasture); color: var(--ink
             el.fGroupsBtn.classList.add('hidden'); el.fGroupsSkip.classList.add('hidden');
             el.fTotalsStep.classList.remove('hidden');
         } else {
-            el.fGroupsInput.disabled = false; el.fGroupsBtn.classList.remove('hidden');
+            el.fGroupsInput.value = ""; el.fGroupsInput.disabled = false; el.fGroupsBtn.classList.remove('hidden');
             el.fTotalsStep.classList.add('hidden');
         }
 
         if (state.finalTotal1Done) { el.fTotal1Input.value = currentProblem.answerTotal; el.fTotal1Input.disabled = true; el.fTotal1Btn.classList.add('hidden'); el.fTotal1Skip.classList.add('hidden'); }
+        else { el.fTotal1Input.value = ""; el.fTotal1Input.disabled = false; el.fTotal1Btn.classList.remove('hidden'); }
+        
         if (state.finalTotal2Done) { el.fTotal2Input.value = currentProblem.answerTotal; el.fTotal2Input.disabled = true; el.fTotal2Btn.classList.add('hidden'); el.fTotal2Skip.classList.add('hidden'); }
+        else { el.fTotal2Input.value = ""; el.fTotal2Input.disabled = false; el.fTotal2Btn.classList.remove('hidden'); }
 
         if (state.finalTotal1Done && state.finalTotal2Done) {
             el.finalCelebrate.innerHTML = `
@@ -623,6 +624,8 @@ html, body { margin: 0; padding: 0; background: var(--pasture); color: var(--ink
                 <p style="font-size:20px; color:var(--ink-soft);">You've found the final answer! Press 'Reset Problem' if you want to try again.</p>
             `;
             el.finalCelebrate.classList.remove('hidden');
+        } else {
+            el.finalCelebrate.classList.add('hidden');
         }
     }
 
@@ -684,16 +687,22 @@ html, body { margin: 0; padding: 0; background: var(--pasture); color: var(--ink
     function checkAllDiffs() { const allDone = state.rows.every(r => state.diffInputs[r.n] === Math.abs((r.n * currentProblem.lowRate + currentProblem.lowLeftover) - (currentProblem.highType === 'extra' ? (r.n * currentProblem.highRate + currentProblem.highRemainder) : (r.n * currentProblem.highRate - currentProblem.highRemainder)))); if (allDone) renderScaffold(); }
 
     function resetProblem() {
-        if (confirm("Reset everything for this problem?")) { 
+        if (confirm("Reset everything for this problem? This will also return to Student Mode.")) { 
+            // 1. Wipe specific storage
             localStorage.removeItem(currentProblem.storageKey); 
-            state = { 
-                rows: [{ n: 1, v1: null, v2: null, vDiff: null }], scaffoldActive: false, barOffset: 0, barDone: false, 
-                diffInputs: {}, attempts: {}, whyDone: false, demoMode: false,
-                finalGroupsDone: false, finalTotal1Done: false, finalTotal2Done: false
-            };
+            
+            // 2. Reset state to absolute default
+            state = getDefaultState();
+            
+            // 3. Force checkbox UI
+            el.demoToggle.checked = false;
+            
+            // 4. Save and full refresh UI
             save();
             renderAll();
-            el.finalCelebrate.classList.add('hidden');
+            
+            // 5. Cleanup leftover overlays
+            document.querySelectorAll('.feedback-panel').forEach(p => p.remove());
         }
     }
 
