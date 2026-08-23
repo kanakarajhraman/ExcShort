@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Excess and Shortage</title>
+<title>Excess and Shortage — Code 2</title>
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@500;700&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@500;600&display=swap" rel="stylesheet" />
@@ -33,7 +33,7 @@
 * { box-sizing: border-box; }
 html, body { margin: 0; padding: 0; background: var(--pasture); color: var(--ink); font-family: var(--font-body); font-size: 24px; line-height: 1.4; }
 
-.page { max-width: 1100px; margin: 0 auto; padding: 10px 14px 60px; }
+.page { max-width: 1200px; margin: 0 auto; padding: 10px 14px 60px; }
 
 .site-header { text-align: center; padding-bottom: 20px; }
 .brand { font-family: var(--font-display); font-weight: 700; font-size: 50px; margin: 0; color: var(--fence-dark); line-height: 1; }
@@ -81,18 +81,29 @@ html, body { margin: 0; padding: 0; background: var(--pasture); color: var(--ink
 
 /* Table */
 .table-scroll { overflow-x: auto; border-radius: var(--radius); border: 2px solid var(--line); margin-bottom: 20px; }
-.esa-table { width: 100%; border-collapse: collapse; background: var(--paper); }
-.esa-table th, .esa-table td { border: 1px solid var(--line); padding: 12px 10px; text-align: center; }
-.esa-table th { background: #efe9d8; font-size: 18px; color: var(--ink-soft); }
-.esa-table td { font-family: var(--font-mono); }
-.esa-table tr.solved { background: var(--tick-green-soft); border: 3px solid var(--tick-green); }
+.esa-table { width: 100%; border-collapse: collapse; background: var(--paper); table-layout: fixed; }
+.esa-table th, .esa-table td { border: 1.5px solid var(--line); padding: 12px 10px; text-align: center; overflow: hidden; }
 
-.cell-op { font-size: 16px; color: var(--ink-soft); display: block; margin-bottom: 4px; }
+/* 75% increase from 18px -> 32px approx */
+.esa-table th { background: #efe9d8; font-size: 32px; color: var(--ink-soft); font-family: var(--font-display); line-height: 1.1; }
+.esa-table td { font-family: var(--font-mono); font-size: 32px; }
+
+/* Narrow first column to force wrapping */
+.col-noun { width: 180px; }
+.col-calc { width: auto; }
+.col-diff { width: 160px; }
+
+.esa-table tr.solved { background: var(--tick-green-soft); outline: 4px solid var(--tick-green); position: relative; z-index: 1; }
+
+/* 75% increase from 16px -> 28px */
+.cell-op-wrap { display: flex; align-items: center; justify-content: center; gap: 8px; flex-wrap: wrap; }
+.cell-op { font-size: 28px; color: var(--ink-soft); font-family: var(--font-mono); font-weight: 500; }
+
 .cell-input { 
     font-family: var(--font-mono); font-size: 32px; width: 110px; text-align: center; 
     border: 2px solid var(--line); border-radius: 8px; padding: 5px; 
 }
-.cell-input:disabled { background: var(--tick-green-soft); border-color: var(--tick-green); color: var(--ink); }
+.cell-input:disabled { background: var(--tick-green-soft); border-color: var(--tick-green); color: var(--ink); opacity: 1; -webkit-text-fill-color: var(--ink); }
 
 /* Buttons */
 .btn { 
@@ -115,7 +126,7 @@ html, body { margin: 0; padding: 0; background: var(--pasture); color: var(--ink
 .visual-line-label { position: absolute; bottom: -30px; left: 50%; transform: translateX(-50%); font-size: 18px; font-weight: 700; color: var(--fence-dark); }
 .bar-col { display: flex; flex-direction: column; align-items: center; width: 140px; transition: height 0.15s ease; }
 .bar { width: 60px; border-radius: 4px; position: relative; transition: height 0.15s ease, background 0.15s ease; }
-.bar-label { position: absolute; width: 150px; text-align: center; left: 50%; transform: translateX(-50%); font-weight: 700; font-size: 18px; white-space: nowrap; }
+.bar-label { position: absolute; width: 150px; text-align: center; left: 50%; transform: translateX(-50%); font-weight: 700; font-size: 18px; white-space: nowrap; font-family: var(--font-mono); }
 .bar.up { border-bottom: none; border-radius: 4px 4px 0 0; }
 .bar.down { border-top: none; border-radius: 0 0 4px 4px; }
 .bar.green { background: var(--tick-green); }
@@ -127,7 +138,7 @@ html, body { margin: 0; padding: 0; background: var(--pasture); color: var(--ink
 /* Feedback */
 .feedback-panel { margin-top: 10px; padding: 12px; border-radius: 8px; font-size: 18px; font-weight: 600; display: flex; align-items: center; justify-content: space-between; gap: 10px; }
 .feedback-panel.bad { background: var(--cross-red-soft); color: var(--cross-red); }
-.skip-link { font-size: 14px; text-decoration: underline; color: var(--ink-soft); cursor: pointer; opacity: 0.6; margin-left: 10px; }
+.skip-link { font-size: 14px; text-decoration: underline; color: var(--ink-soft); cursor: pointer; opacity: 0.6; margin-left: 10px; font-family: var(--font-body); }
 
 .celebrate { margin-top: 30px; padding: 30px; text-align: center; border: 5px solid var(--tick-green); background: white; border-radius: var(--radius); }
 
@@ -137,10 +148,10 @@ html, body { margin: 0; padding: 0; background: var(--pasture); color: var(--ink
 @media (max-width: 800px) {
   body { font-size: 18px; }
   .brand { font-size: 36px; }
-  .rate-val { font-size: 24px; }
-  .rate-sub { font-size: 20px; }
+  .esa-table th { font-size: 20px; }
+  .cell-op { font-size: 18px; }
   .cell-input { width: 80px; font-size: 22px; }
-  .esa-table th { font-size: 14px; padding: 6px; }
+  .col-noun { width: 120px; }
 }
 </style>
 </head>
@@ -167,15 +178,21 @@ html, body { margin: 0; padding: 0; background: var(--pasture); color: var(--ink
 
     <section class="controls-row">
         <div class="input-group">
-            <span id="groupNounLabel">Number of members</span>
+            <span id="groupNounLabel">Number of friends</span>
             <input type="number" id="groupCountInput" class="num-input" inputmode="numeric" min="1">
             <button class="btn btn-primary" id="submitCountBtn">Submit</button>
         </div>
-        <button class="btn btn-ghost" id="addOneBtn">+ Add one more</button>
+        <button class="btn btn-ghost" id="addOneBtn">+ Add +1 Friend</button>
     </section>
 
     <div class="table-scroll">
         <table class="esa-table">
+            <colgroup>
+                <col class="col-noun">
+                <col class="col-calc">
+                <col class="col-calc">
+                <col class="col-diff" id="colDiffStyle">
+            </colgroup>
             <thead>
                 <tr id="tableHead"></tr>
             </thead>
@@ -231,25 +248,25 @@ html, body { margin: 0; padding: 0; background: var(--pasture); color: var(--ink
 (function() {
     const PROBLEMS = [
         {
-            id: "a1", tabLabel: "A1", storageKey: "esa_a1_v3", personName: "Edric", itemName: "sweets", groupNoun: "members",
-            questionText: "<strong>Edric</strong> has some sweets to give to the <strong>members</strong> of his group. If he gives each member <strong>3 sweets</strong>, he has <strong>23 sweets left</strong>. If he gives each member <strong>7 sweets</strong>, he has <strong>3 sweets left</strong>. How many sweets does Edric have?",
+            id: "a1", tabLabel: "A1", storageKey: "esa_a1_v4", personName: "Edric", itemName: "sweets", groupNoun: "friends", groupNounSingular: "Friend",
+            questionText: "<strong>Edric</strong> has some sweets to give to <strong>his friends</strong>. If he gives each friend <strong>3 sweets</strong>, he has <strong>23 sweets left</strong>. If he gives each friend <strong>7 sweets</strong>, he has <strong>3 sweets left</strong>. How many sweets does Edric have?",
             lowRate: 3, lowLeftover: 23, highRate: 7, highRemainder: 3, highType: "extra",
             answerGroups: 5, answerTotal: 38, bigDifference: 20, smallDifference: 4, whyAnswer: "7-3", slideDirection: "remove", slideSteps: 3
         },
         {
-            id: "a2", tabLabel: "A2", storageKey: "esa_a2_v3", personName: "Celeste", itemName: "marbles", groupNoun: "cousins",
+            id: "a2", tabLabel: "A2", storageKey: "esa_a2_v4", personName: "Celeste", itemName: "marbles", groupNoun: "cousins", groupNounSingular: "Cousin",
             questionText: "<strong>Celeste</strong> has some marbles to share among her <strong>cousins</strong>. If she gives each cousin <strong>4 marbles</strong>, she has <strong>29 marbles left</strong>. If she gives each cousin <strong>10 marbles</strong>, she has <strong>5 marbles left</strong>. How many marbles does Celeste have?",
             lowRate: 4, lowLeftover: 29, highRate: 10, highRemainder: 5, highType: "extra",
             answerGroups: 4, answerTotal: 45, bigDifference: 24, smallDifference: 6, whyAnswer: "10-4", slideDirection: "remove", slideSteps: 5
         },
         {
-            id: "b1", tabLabel: "B1", storageKey: "esa_b1_v3", personName: "Edric", itemName: "sweets", groupNoun: "members",
-            questionText: "<strong>Edric</strong> has some sweets to give to the <strong>members</strong> of his group. If he gives each member <strong>3 sweets</strong>, he has <strong>23 sweets left</strong>. If he gives each member <strong>7 sweets</strong>, he is <strong>short of 5 sweets</strong>. How many sweets does Edric have?",
+            id: "b1", tabLabel: "B1", storageKey: "esa_b1_v4", personName: "Edric", itemName: "sweets", groupNoun: "friends", groupNounSingular: "Friend",
+            questionText: "<strong>Edric</strong> has some sweets to give to <strong>his friends</strong>. If he gives each friend <strong>3 sweets</strong>, he has <strong>23 sweets left</strong>. If he gives each friend <strong>7 sweets</strong>, he is <strong>short of 5 sweets</strong>. How many sweets does Edric have?",
             lowRate: 3, lowLeftover: 23, highRate: 7, highRemainder: 5, highType: "short",
             answerGroups: 7, answerTotal: 44, bigDifference: 28, smallDifference: 4, whyAnswer: "7-3", slideDirection: "add", slideSteps: 5
         },
         {
-            id: "b2", tabLabel: "B2", storageKey: "esa_b2_v3", personName: "Celeste", itemName: "marbles", groupNoun: "cousins",
+            id: "b2", tabLabel: "B2", storageKey: "esa_b2_v4", personName: "Celeste", itemName: "marbles", groupNoun: "cousins", groupNounSingular: "Cousin",
             questionText: "<strong>Celeste</strong> has some marbles to share among her <strong>cousins</strong>. If she gives each cousin <strong>4 marbles</strong>, she has <strong>29 marbles left</strong>. If she gives each cousin <strong>10 marbles</strong>, she is <strong>short of 7 marbles</strong>. How many marbles does Celeste have?",
             lowRate: 4, lowLeftover: 29, highRate: 10, highRemainder: 7, highType: "short",
             answerGroups: 6, answerTotal: 53, bigDifference: 36, smallDifference: 6, whyAnswer: "10-4", slideDirection: "add", slideSteps: 7
@@ -273,6 +290,7 @@ html, body { margin: 0; padding: 0; background: var(--pasture); color: var(--ink
         scaffoldArea: document.getElementById('scaffoldArea'),
         demoToggle: document.getElementById('demoToggle'),
         resetBtn: document.getElementById('resetBtn'),
+        colDiffStyle: document.getElementById('colDiffStyle'),
         // Scaffold UI
         gapReadout: document.getElementById('gapReadout'),
         bar1: document.getElementById('bar1'),
@@ -291,7 +309,6 @@ html, body { margin: 0; padding: 0; background: var(--pasture); color: var(--ink
     };
 
     function init() {
-        renderTabs();
         loadProblem(PROBLEMS[0]);
 
         el.submitBtn.onclick = () => addRow(parseInt(el.groupInput.value));
@@ -351,7 +368,12 @@ html, body { margin: 0; padding: 0; background: var(--pasture); color: var(--ink
         renderTabs();
         el.question.innerHTML = currentProblem.questionText;
         el.groupNoun.innerText = `Number of ${currentProblem.groupNoun}`;
+        el.addBtn.innerText = `+ Add +1 ${currentProblem.groupNounSingular}`;
         
+        // Sync input to highest row
+        const max = state.rows.length ? Math.max(...state.rows.map(r => r.n)) : "";
+        el.groupInput.value = max;
+
         // Rate Cards
         el.rateCards.innerHTML = `
             <div class="rate-card green">
@@ -364,13 +386,16 @@ html, body { margin: 0; padding: 0; background: var(--pasture); color: var(--ink
             </div>
         `;
 
-        // Table Head
+        // Table Head - Logic for wrapping noun
+        const nounHeader = `Number of ${currentProblem.groupNoun}`;
         el.tableHead.innerHTML = `
-            <th>Number of ${currentProblem.groupNoun}</th>
-            <th>${currentProblem.lowRate} each</th>
-            <th>${currentProblem.highRate} each</th>
-            ${state.scaffoldActive ? '<th>Difference</th>' : ''}
+            <th class="col-noun">${nounHeader}</th>
+            <th class="col-calc">${currentProblem.lowRate} each</th>
+            <th class="col-calc">${currentProblem.highRate} each</th>
+            ${state.scaffoldActive ? '<th class="col-diff">Difference</th>' : ''}
         `;
+
+        el.colDiffStyle.classList.toggle('hidden', !state.scaffoldActive);
 
         renderTable();
         updateScaffoldVisibility();
@@ -379,8 +404,9 @@ html, body { margin: 0; padding: 0; background: var(--pasture); color: var(--ink
 
     function addRow(n) {
         if (isNaN(n) || n < 1) return;
-        if (state.rows.some(r => r.n === n)) { alert("This group size is already in the table."); return; }
+        if (state.rows.some(r => r.n === n)) { alert(`This number of ${currentProblem.groupNoun} is already in the table.`); return; }
         state.rows.push({ n, v1: null, v2: null, vDiff: null });
+        el.groupInput.value = n; // Sync counter to latest
         save(); renderTable();
     }
 
@@ -397,13 +423,13 @@ html, body { margin: 0; padding: 0; background: var(--pasture); color: var(--ink
                 ? (row.n * currentProblem.highRate + currentProblem.highRemainder)
                 : (row.n * currentProblem.highRate - currentProblem.highRemainder);
             
-            if (state.demoMode || row.v1 === target1 && row.v2 === target2) {
+            if (state.demoMode || (row.v1 === target1 && row.v2 === target2)) {
                 if (target1 === target2) tr.className = "solved";
             }
 
-            tr.innerHTML = `<td>${row.n}</td>`;
-            tr.appendChild(renderCell(row, 1, target1, `${row.n} × ${currentProblem.lowRate} + ${currentProblem.lowLeftover}`, 'green'));
-            tr.appendChild(renderCell(row, 2, target2, `${row.n} × ${currentProblem.highRate} ${currentProblem.highType === 'extra' ? '+' : '-'} ${currentProblem.highRemainder}`, currentProblem.highType === 'extra' ? 'green' : 'red'));
+            tr.innerHTML = `<td style="font-weight:700;">${row.n}</td>`;
+            tr.appendChild(renderCell(row, 1, target1, `${row.n} × ${currentProblem.lowRate} + ${currentProblem.lowLeftover}`));
+            tr.appendChild(renderCell(row, 2, target2, `${row.n} × ${currentProblem.highRate} ${currentProblem.highType === 'extra' ? '+' : '-'} ${currentProblem.highRemainder}`));
             
             if (state.scaffoldActive) {
                 const diffTarget = Math.abs(target1 - target2);
@@ -413,24 +439,34 @@ html, body { margin: 0; padding: 0; background: var(--pasture); color: var(--ink
         });
     }
 
-    function renderCell(row, idx, target, label, colorClass) {
+    function renderCell(row, idx, target, label) {
         const td = document.createElement('td');
         const key = `r${row.n}_v${idx}`;
         const currentVal = row[`v${idx}`];
         const isDone = state.demoMode || currentVal === target;
 
-        td.innerHTML = `<span class="cell-op">${label}</span>`;
+        const wrap = document.createElement('div');
+        wrap.className = "cell-op-wrap";
+        wrap.innerHTML = `<span class="cell-op">${label} = </span>`;
+
         if (isDone) {
-            td.innerHTML += `<div class="cell-input" style="background:var(--tick-green-soft); width:100%; border-color:var(--tick-green); margin:0 auto;">${target}</div>`;
+            const display = document.createElement('div');
+            display.className = "cell-input";
+            display.style.background = "var(--tick-green-soft)";
+            display.style.borderColor = "var(--tick-green)";
+            display.innerText = target;
+            wrap.appendChild(display);
         } else {
             const input = document.createElement('input');
             input.className = "cell-input";
             input.type = "number";
             input.inputmode = "numeric";
             input.value = currentVal || "";
+            
             const btn = document.createElement('button');
             btn.className = "btn btn-primary btn-check";
             btn.innerText = "Check";
+            
             const skip = document.createElement('span');
             skip.className = "skip-link" + (state.demoMode ? "" : " hidden");
             skip.innerText = "Skip";
@@ -444,10 +480,11 @@ html, body { margin: 0; padding: 0; background: var(--pasture); color: var(--ink
             };
             skip.onclick = () => { row[`v${idx}`] = target; save(); renderTable(); checkSolved(); };
             
-            td.appendChild(input);
-            td.appendChild(btn);
-            td.appendChild(skip);
+            wrap.appendChild(input);
+            wrap.appendChild(btn);
+            wrap.appendChild(skip);
         }
+        td.appendChild(wrap);
         return td;
     }
 
@@ -457,16 +494,19 @@ html, body { margin: 0; padding: 0; background: var(--pasture); color: var(--ink
         const isDone = state.demoMode || state.diffInputs[row.n] === target;
 
         if (!state.barDone) {
-            td.innerHTML = `<span style="color:var(--ink-soft); font-style:italic;">...</span>`;
+            td.innerHTML = `<span style="color:var(--ink-soft); font-style:italic; font-size:24px;">...</span>`;
         } else if (isDone) {
             td.innerHTML = `<div class="cell-input" style="background:var(--amber-light); border-color:var(--amber); width:100%; margin:0 auto;">${target}</div>`;
         } else {
             const input = document.createElement('input');
             input.className = "cell-input";
             input.type = "number"; input.inputmode = "numeric";
+            input.style.width = "90px";
+            
             const btn = document.createElement('button');
             btn.className = "btn btn-primary btn-check";
-            btn.innerText = "Check";
+            btn.innerText = "✓";
+            
             const skip = document.createElement('span');
             skip.className = "skip-link" + (state.demoMode ? "" : " hidden");
             skip.innerText = "Skip";
@@ -475,10 +515,14 @@ html, body { margin: 0; padding: 0; background: var(--pasture); color: var(--ink
                 handleInput(key, parseInt(input.value), target, () => {
                     state.diffInputs[row.n] = target;
                     save(); renderTable(); checkAllDiffs();
-                }, "Difference calculation");
+                }, "Difference");
             };
             skip.onclick = () => { state.diffInputs[row.n] = target; save(); renderTable(); checkAllDiffs(); };
-            td.appendChild(input); td.appendChild(btn); td.appendChild(skip);
+            
+            const wrap = document.createElement('div');
+            wrap.className = "cell-op-wrap";
+            wrap.appendChild(input); wrap.appendChild(btn); wrap.appendChild(skip);
+            td.appendChild(wrap);
         }
         return td;
     }
@@ -489,7 +533,7 @@ html, body { margin: 0; padding: 0; background: var(--pasture); color: var(--ink
             onSuccess();
         } else {
             const att = state.attempts[id];
-            let msg = att < 3 ? `Not quite. Try calculating ${hintLabel} again.` : `The answer is ${target}.`;
+            let msg = att < 3 ? `Not quite. Check your calculation for "${hintLabel}".` : `The answer is ${target}.`;
             showFeedback(msg, id);
         }
     }
@@ -503,11 +547,14 @@ html, body { margin: 0; padding: 0; background: var(--pasture); color: var(--ink
         div.innerHTML = `<span>${msg}</span><button class="btn btn-ghost btn-check">Retry</button>`;
         div.querySelector('button').onclick = () => div.remove();
         document.body.appendChild(div);
-        const rect = document.activeElement.getBoundingClientRect();
+        
+        const activeEl = document.activeElement;
+        const rect = activeEl.getBoundingClientRect();
         div.style.position = 'fixed';
         div.style.top = (rect.bottom + window.scrollY + 10) + 'px';
-        div.style.left = rect.left + 'px';
+        div.style.left = Math.max(10, rect.left - 50) + 'px';
         div.style.zIndex = 1000;
+        div.style.boxShadow = "0 10px 25px rgba(0,0,0,0.2)";
     }
 
     function checkSolved() {
@@ -592,7 +639,7 @@ html, body { margin: 0; padding: 0; background: var(--pasture); color: var(--ink
 
     function showWhyStep() {
         el.whyStep.classList.remove('hidden');
-        el.whyPrompt.innerText = `The gap closes by ${currentProblem.smallDifference} every time we add one more ${currentProblem.groupNoun}. Why ${currentProblem.smallDifference}?`;
+        el.whyPrompt.innerText = `The gap closes by ${currentProblem.smallDifference} every time we add one more ${currentProblem.groupNounSingular.toLowerCase()}. Why ${currentProblem.smallDifference}?`;
         el.whySkip.classList.toggle('hidden', !state.demoMode);
         if (state.whyDone) {
             completeWhy(currentProblem.whyAnswer);
@@ -612,7 +659,7 @@ html, body { margin: 0; padding: 0; background: var(--pasture); color: var(--ink
             if (state.attempts['why'] >= 3) {
                 completeWhy(currentProblem.whyAnswer);
             } else {
-                showFeedbackWhy("Not quite. Look at the two rates in the cards.");
+                showFeedbackWhy("Not quite. Compare the two rates (the numbers given for 'each').");
             }
         }
     }
@@ -633,9 +680,9 @@ html, body { margin: 0; padding: 0; background: var(--pasture); color: var(--ink
         save();
         
         el.finalCelebrate.innerHTML = `
-            <h2 class="brand" style="font-size:40px;">Solved!</h2>
-            <p style="font-size:28px; font-weight:700;">${currentProblem.bigDifference} ÷ ${currentProblem.smallDifference} = ${currentProblem.answerGroups} ${currentProblem.groupNoun}.</p>
-            <p>Edric has <strong>${currentProblem.answerTotal} ${currentProblem.itemName}</strong>.</p>
+            <h2 class="brand" style="font-size:40px;">Correct!</h2>
+            <p style="font-size:32px; font-weight:700; font-family:var(--font-mono);">${currentProblem.bigDifference} ÷ ${currentProblem.smallDifference} = ${currentProblem.answerGroups} ${currentProblem.groupNoun}.</p>
+            <p style="font-size:24px;">The answer is <strong>${currentProblem.answerTotal} ${currentProblem.itemName}</strong>.</p>
         `;
         el.finalCelebrate.classList.remove('hidden');
     }
@@ -646,7 +693,7 @@ html, body { margin: 0; padding: 0; background: var(--pasture); color: var(--ink
     }
 
     function resetProblem() {
-        if (confirm("Reset current problem?")) {
+        if (confirm("Clear all work for this problem?")) {
             localStorage.removeItem(currentProblem.storageKey);
             loadProblem(currentProblem);
         }
